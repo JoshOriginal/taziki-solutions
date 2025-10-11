@@ -4,12 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Taziki Solutions - Content Manager</title>
-  
-  <!-- Netlify Identity Widget -->
+
+  <!-- 🟢 Netlify Identity Widget (must load first) -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  
-  <!-- Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
 
   <!-- Style the admin page to match your theme -->
   <style>
@@ -18,7 +15,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       background: #0f172a;
       color: white;
@@ -27,7 +24,7 @@
       padding: 0;
       min-height: 100vh;
     }
-    
+
     .loading {
       display: flex;
       justify-content: center;
@@ -36,7 +33,7 @@
       flex-direction: column;
       background: #0f172a;
     }
-    
+
     .loading-spinner {
       border: 4px solid #1e293b;
       border-left: 4px solid #F97316;
@@ -46,17 +43,17 @@
       animation: spin 1s linear infinite;
       margin-bottom: 20px;
     }
-    
+
     .loading-text {
       color: #94a3b8;
       font-size: 16px;
     }
-    
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    
+
     /* Netlify CMS Custom Styles */
     .nc-githubAuthenticationPage-root,
     .nc-notif__root,
@@ -66,21 +63,22 @@
       background: #0f172a !important;
       color: white !important;
     }
-    
+
     /* Hide the loading screen when CMS loads */
     .nc-root {
       display: none;
     }
-    
+
     .nc-root.loaded {
       display: block;
     }
-    
+
     .loading.hidden {
       display: none;
     }
   </style>
 </head>
+
 <body>
   <!-- Loading screen -->
   <div class="loading" id="loadingScreen">
@@ -88,19 +86,30 @@
     <p class="loading-text">Loading Content Manager...</p>
   </div>
 
+  <!-- 🟠 Netlify Identity Redirect Fix -->
   <script>
-    // Wait for CMS to load and then hide loading screen
+    // Handle Netlify Identity redirect correctly
+    if (window.location.hash && window.location.hash.includes('invite_token')) {
+      const hash = window.location.hash;
+      window.location.href = window.location.origin + '/admin/' + hash;
+    }
+  </script>
+
+  <!-- 🟢 Netlify CMS (must load after the redirect script) -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+
+  <!-- 🟣 Loading + Error handling -->
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Check if CMS loaded successfully
+      // Wait a bit for CMS to initialize
       setTimeout(function() {
         const loadingScreen = document.getElementById('loadingScreen');
         const cmsRoot = document.querySelector('.nc-root');
-        
+
         if (cmsRoot) {
           loadingScreen.classList.add('hidden');
           cmsRoot.classList.add('loaded');
         } else {
-          // If CMS didn't load, show error
           loadingScreen.innerHTML = `
             <div style="text-align: center; color: #ef4444;">
               <h2 style="margin-bottom: 16px;">Failed to load CMS</h2>
@@ -115,11 +124,6 @@
           `;
         }
       }, 3000);
-
-      // Handle Netlify Identity redirect
-      if (window.location.hash && window.location.hash.includes('#')) {
-        window.location.href = window.location.origin + '/admin/' + window.location.hash;
-      }
     });
   </script>
 </body>
