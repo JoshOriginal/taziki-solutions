@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: JoshOriginal/taziki-solutions  # You'll change this after creating GitHub repo
+  name: git-gateway
   branch: main
 
 # Media storage
@@ -34,3 +33,5 @@ collections:
       - {label: "Featured Image", name: "featured_image", widget: "image", required: true}
       - {label: "Excerpt", name: "excerpt", widget: "text", required: true}
       - {label: "Body", name: "body", widget: "markdown", required: true}
+
+      #fix: switch backend to git-gateway for Netlify CMS
