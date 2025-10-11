@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | Taziki Solutions</title>
+  
+  <!-- Preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Preload critical font -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  
+  <!-- Load fonts with optimization -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Fallback for no JavaScript -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  </noscript>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F97316',
+            secondary: '#16A34A',
+            dark: '#0f172a',
+            'dark-light': '#1e293b',
+            'dark-lighter': '#334155'
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'poppins': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #F97316, #F97316);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #ea580c, #F97316);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(90deg, #16A34A, #16A34A);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: linear-gradient(90deg, #15803d, #16A34A);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
+    }
+    
+    .blog-card {
+      transition: all 0.3s ease;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navbar-fixed {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .navbar-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-link:hover {
+      color: #F97316;
+    }
+    
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans">
+  <!-- Header/Navigation -->
+  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="../index.html" class="text-2xl md:text-3xl font-bold font-poppins">
+            <span class="text-primary">Taziki</span><span class="text-white">Solutions</span>
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
+          <a href="../index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
+          <a href="../index.html#about" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">About</a>
+          <a href="../index.html#services" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Services</a>
+          <a href="index.html" class="navbar-link text-primary px-2 py-1 text-sm">Blog</a>
+          <a href="../index.html#contact" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Contact</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <div class="-mr-2 flex items-center md:hidden">
+          <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-lighter focus:outline-none">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path :class="{'hidden': open, 'inline-flex': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path :class="{'inline-flex': open, 'hidden': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="../index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
+        <a href="../index.html#about" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">About</a>
+        <a href="../index.html#services" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Services</a>
+        <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-dark-lighter">Blog</a>
+        <a href="../index.html#contact" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Blog Listing Section -->
+  <section class="pt-32 pb-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold font-poppins mb-4">Our <span class="gradient-text">Blog</span></h1>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg">Insights, trends, and expertise from the Taziki Solutions team.</p>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <!-- Search and Filter -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1">
+            <input type="text" placeholder="Search articles..." class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          <div class="flex gap-2">
+            <select class="px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+              <option value="">All Categories</option>
+              <option value="technology">Technology Trends</option>
+              <option value="marketing">Digital Marketing</option>
+              <option value="cabling">Smart Cabling</option>
+              <option value="development">Web & App Development</option>
+              <option value="growth">Business Growth</option>
+            </select>
+            <button class="px-6 py-3 bg-primary rounded-lg text-white hover:bg-primary/90 transition-colors">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Blog Post 1 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-smart-buildings.jpg" alt="The Future of Smart Buildings" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">Technology Trends</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors">
+              <a href="smart-buildings.html">The Future of Smart Buildings: Integration for Maximum Efficiency</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              Discover how integrated smart building technologies are revolutionizing commercial spaces, improving energy efficiency, and enhancing user experience.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>June 12, 2025</span>
+              </div>
+              <a href="smart-buildings.html" class="text-primary hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Blog Post 2 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-web-development.jpg" alt="Web Development Trends" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-secondary/90 text-white text-xs font-bold rounded-full">Web Development</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-secondary transition-colors">
+              <a href="web-development-trends.html">5 Web Development Trends That Will Dominate 2025</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              Stay ahead of the curve with our analysis of emerging web technologies that are reshaping user experiences and business capabilities.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>May 28, 2025</span>
+              </div>
+              <a href="web-development-trends.html" class="text-secondary hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Blog Post 3 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-app-development.jpg" alt="App Development Guide" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-blue-500/90 text-white text-xs font-bold rounded-full">App Development</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-blue-500 transition-colors">
+              <a href="app-development-guide.html">From Concept to Launch: A Guide to Successful App Development</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              Learn the essential steps to transform your app idea into a market-ready product that users will love and adopt.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>May 15, 2025</span>
+              </div>
+              <a href="app-development-guide.html" class="text-blue-500 hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Additional Blog Posts -->
+        <!-- Blog Post 4 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-smart-buildings.jpg" alt="Network Security" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-purple-500/90 text-white text-xs font-bold rounded-full">Security</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-purple-500 transition-colors">
+              <a href="network-security.html">Essential Network Security Measures for Modern Businesses</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              Protect your digital assets with these crucial network security practices that every business should implement in 2025.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>April 22, 2025</span>
+              </div>
+              <a href="network-security.html" class="text-purple-500 hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Blog Post 5 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-web-development.jpg" alt="Digital Transformation" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-pink-500/90 text-white text-xs font-bold rounded-full">Business Growth</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-pink-500 transition-colors">
+              <a href="digital-transformation.html">Digital Transformation: A Roadmap for Kenyan Businesses</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              How local businesses can successfully navigate the digital transformation journey and stay competitive in the modern market.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>April 10, 2025</span>
+              </div>
+              <a href="digital-transformation.html" class="text-pink-500 hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Blog Post 6 -->
+        <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+          <div class="relative h-48 overflow-hidden">
+            <img src="../images/blog-app-development.jpg" alt="Cloud Solutions" class="w-full h-full object-cover" loading="lazy">
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 bg-amber-500/90 text-white text-xs font-bold rounded-full">Cloud Computing</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-3 hover:text-amber-500 transition-colors">
+              <a href="cloud-solutions.html">Choosing the Right Cloud Solution for Your Business Needs</a>
+            </h3>
+            <p class="text-gray-300 mb-4 line-clamp-3">
+              Compare different cloud service models and find the perfect fit for your organization's specific requirements and growth plans.
+            </p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2 text-sm text-gray-400">
+                <i class="far fa-calendar"></i>
+                <span>March 28, 2025</span>
+              </div>
+              <a href="cloud-solutions.html" class="text-amber-500 hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="flex justify-center mt-16">
+        <nav class="flex items-center space-x-2">
+          <a href="#" class="px-4 py-2 bg-dark-lighter text-gray-400 rounded-lg hover:bg-primary hover:text-white transition-colors">
+            <i class="fas fa-chevron-left"></i>
+          </a>
+          <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg">1</a>
+          <a href="#" class="px-4 py-2 bg-dark-lighter text-gray-300 rounded-lg hover:bg-primary hover:text-white transition-colors">2</a>
+          <a href="#" class="px-4 py-2 bg-dark-lighter text-gray-300 rounded-lg hover:bg-primary hover:text-white transition-colors">3</a>
+          <a href="#" class="px-4 py-2 bg-dark-lighter text-gray-400 rounded-lg hover:bg-primary hover:text-white transition-colors">
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-20 pb-10 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="border-t border-gray-700/50 pt-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-3 space-y-4">
+            <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
+            <p class="text-gray-300 text-sm">
+              Empowering businesses through integrated technology solutions since 2020.
+            </p>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Services</h3>
+            <ul class="space-y-2">
+              <li><a href="../index.html#services" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
+              <li><a href="../index.html#services" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
+              <li><a href="../index.html#services" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
+              <li><a href="../index.html#services" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Company</h3>
+            <ul class="space-y-2">
+              <li><a href="../index.html#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
+              <li><a href="../index.html#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
+              <li><a href="../index.html#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
+              <li><a href="index.html" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-3 space-y-4">
+            <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
+            <p class="text-gray-300 text-sm">
+              Stay updated with our latest insights and news.
+            </p>
+            <div class="flex">
+              <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+              <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center text-gray-500 text-sm mt-12">
+          <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

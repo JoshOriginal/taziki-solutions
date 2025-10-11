@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taziki Solutions - Content Manager</title>
+  
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <!-- Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+
+  <!-- Style the admin page to match your theme -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background: #0f172a;
+    }
+    
+    .loading-spinner {
+      border: 4px solid #1e293b;
+      border-left: 4px solid #F97316;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    .loading-text {
+      color: #94a3b8;
+      font-size: 16px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Netlify CMS Custom Styles */
+    .nc-githubAuthenticationPage-root,
+    .nc-notif__root,
+    .nc-entryEditor-container,
+    .nc-mediaLibrary-container,
+    .nc-collectionPage-container {
+      background: #0f172a !important;
+      color: white !important;
+    }
+    
+    /* Hide the loading screen when CMS loads */
+    .nc-root {
+      display: none;
+    }
+    
+    .nc-root.loaded {
+      display: block;
+    }
+    
+    .loading.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Loading Content Manager...</p>
+  </div>
+
+  <script>
+    // Wait for CMS to load and then hide loading screen
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if CMS loaded successfully
+      setTimeout(function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const cmsRoot = document.querySelector('.nc-root');
+        
+        if (cmsRoot) {
+          loadingScreen.classList.add('hidden');
+          cmsRoot.classList.add('loaded');
+        } else {
+          // If CMS didn't load, show error
+          loadingScreen.innerHTML = `
+            <div style="text-align: center; color: #ef4444;">
+              <h2 style="margin-bottom: 16px;">Failed to load CMS</h2>
+              <p style="margin-bottom: 16px;">Please check:</p>
+              <ul style="text-align: left; margin-bottom: 16px;">
+                <li>• admin/config.yml exists</li>
+                <li>• Netlify Identity is enabled</li>
+                <li>• You're accessing via your deployed domain</li>
+              </ul>
+              <a href="/" style="color: #F97316; text-decoration: underline;">Return to Site</a>
+            </div>
+          `;
+        }
+      }, 3000);
+
+      // Handle Netlify Identity redirect
+      if (window.location.hash && window.location.hash.includes('#')) {
+        window.location.href = window.location.origin + '/admin/' + window.location.hash;
+      }
+    });
+  </script>
+</body>
+</html>

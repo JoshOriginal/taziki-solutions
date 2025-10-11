@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taziki Solutions | Where Innovation Meets Opportunity</title>
+  
+  <!-- Preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Preload critical font -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  
+  <!-- Load fonts with optimization -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  
+  <!-- External resources -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Fallback for no JavaScript -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  </noscript>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F97316',
+            secondary: '#16A34A',
+            dark: '#0f172a',
+            'dark-light': '#1e293b',
+            'dark-lighter': '#334155'
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'poppins': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style id="app-style">
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero-gradient {
+      background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 70%),
+                 radial-gradient(circle at bottom left, rgba(22, 163, 74, 0.15), transparent 70%);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #F97316, #F97316);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #ea580c, #F97316);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(90deg, #16A34A, #16A34A);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: linear-gradient(90deg, #15803d, #16A34A);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
+    }
+    
+    .service-card {
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+    }
+    
+    .service-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .why-us-card {
+      transition: all 0.3s ease;
+    }
+    
+    .why-us-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .blog-card {
+      transition: all 0.3s ease;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    .animate-pulse-slow {
+      animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .chatbox-shadow {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Navbar styles */
+    .navbar-fixed {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .navbar-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-link:hover {
+      color: #F97316;
+    }
+    
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Mobile menu animation */
+    .mobile-menu {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: top;
+    }
+    
+    .mobile-menu.hidden {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    
+    /* Tooltip styles */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #0f172a;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans">
+  <!-- Header/Navigation -->
+  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="#home" class="text-2xl md:text-3xl font-bold font-poppins">
+            <span class="text-primary">Taziki</span><span class="text-white">Solutions</span>
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
+          <a href="#home" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
+          <a href="#about" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">About</a>
+          <a href="#vision" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Vision</a>
+          <a href="#mission" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Mission</a>
+          <a href="#services" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Services</a>
+          <a href="#why-us" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Why Choose Us</a>
+          <a href="#blog" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
+          <a href="#contact" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Contact</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <div class="-mr-2 flex items-center md:hidden">
+          <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-lighter focus:outline-none">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path :class="{'hidden': open, 'inline-flex': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path :class="{'inline-flex': open, 'hidden': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#home" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
+        <a href="#about" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">About</a>
+        <a href="#vision" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Vision</a>
+        <a href="#mission" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Mission</a>
+        <a href="#services" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Services</a>
+        <a href="#why-us" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Why Choose Us</a>
+        <a href="#blog" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
+        <a href="#contact" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section / Landing Page -->
+  <section id="home" class="hero-gradient min-h-screen flex items-center pt-16 overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6 py-12">
+          <div class="animate-pulse-slow">
+            <div class="inline-block px-4 py-2 bg-dark-lighter rounded-full text-sm font-medium text-primary mb-4">Welcome to Taziki Solutions</div>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
+            Where <span class="gradient-text">innovation</span> meets <span class="gradient-text">opportunity</span>!
+          </h1>
+          <p class="text-lg text-gray-300 max-w-2xl">
+            Taziki Solutions is a forward-thinking digital technology company specializing in integrated IT services for modern businesses. We deliver cutting-edge solutions in network infrastructure, app development, web design, and security systems that transform how organizations operate in the digital landscape.
+          </p>
+          <div class="pt-4">
+            <a href="#services" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+              Explore Our Services
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:flex justify-center">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
+            <img src="images/hero-tech.jpg" alt="Technology Innovation" class="relative z-10 rounded-lg shadow-2xl animate-float transform h-[400px] w-[600px] object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background elements -->
+    <div class="absolute top-1/3 right-10 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 left-10 w-80 h-80 bg-secondary/10 rounded-full filter blur-3xl animate-pulse-slow"></div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">About <span class="gradient-text">Taziki Solutions</span></h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <p class="text-lg text-gray-300">
+            Founded in Kenya, Taziki Solutions emerged from a vision to revolutionize how businesses harness technology. We understand that in today's fast-paced digital landscape, organizations need more than just isolated tech solutions—they need integrated, future-proof systems that grow alongside their ambitions.
+          </p>
+          <p class="text-lg text-gray-300">
+            Our team combines deep technical expertise with business acumen, allowing us to deliver solutions that not only solve immediate challenges but create lasting competitive advantages. From comprehensive network infrastructure to innovative applications and websites, we build digital ecosystems that empower businesses to thrive.
+          </p>
+          <p class="text-lg text-gray-300">
+            What sets us apart is our commitment to understanding each client's unique context. We don't just implement technology; we architect solutions that align with your organizational goals, culture, and growth trajectory. Our collaborative approach ensures that every project we undertake becomes a stepping stone toward your larger vision.
+          </p>
+          <div class="pt-4">
+            <a href="#services" class="btn-secondary inline-block px-8 py-3 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+              Our Services
+              <i class="fas fa-chevron-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        <div class="relative flex justify-center">
+          <div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full blur-3xl"></div>
+          <img src="images/about-team.jpg" alt="Taziki Team" class="relative z-10 rounded-lg shadow-2xl animate-float h-[400px] w-full object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section id="vision" class="py-20 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Our <span class="gradient-text">Vision</span></h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto bg-dark-light/50 backdrop-blur-sm rounded-2xl p-10 border border-gray-700/50 shadow-xl">
+        <div class="relative">
+          <div class="absolute top-0 left-0 -mt-5 -ml-5">
+            <i class="fas fa-quote-left text-4xl text-primary/30"></i>
+          </div>
+          <div class="absolute bottom-0 right-0 -mb-5 -mr-5">
+            <i class="fas fa-quote-right text-4xl text-secondary/30"></i>
+          </div>
+          <p class="text-2xl md:text-3xl text-center font-poppins leading-relaxed italic text-gray-200">
+            To be the catalyst for digital transformation across East Africa, creating technology solutions that enable businesses to reach their highest potential while fostering innovation and sustainable growth.
+          </p>
+        </div>
+      </div>
+      
+      <div class="mt-16 flex flex-wrap justify-center gap-8">
+        <div class="flex flex-col items-center p-6 bg-dark-light/50 backdrop-blur-sm rounded-xl border border-gray-700/30 max-w-xs">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+            <i class="fas fa-lightbulb text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Innovation</h3>
+          <p class="text-center text-gray-300">Pioneering solutions that address tomorrow's challenges today</p>
+        </div>
+        
+        <div class="flex flex-col items-center p-6 bg-dark-light/50 backdrop-blur-sm rounded-xl border border-gray-700/30 max-w-xs">
+          <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
+            <i class="fas fa-chart-line text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Growth</h3>
+          <p class="text-center text-gray-300">Enabling sustainable business expansion through technology</p>
+        </div>
+        
+        <div class="flex flex-col items-center p-6 bg-dark-light/50 backdrop-blur-sm rounded-xl border border-gray-700/30 max-w-xs">
+          <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-handshake text-blue-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Partnership</h3>
+          <p class="text-center text-gray-300">Building long-term relationships based on trust and mutual success</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background elements -->
+    <div class="absolute top-1/4 left-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-1/3 right-10 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl"></div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Our <span class="gradient-text">Mission</span></h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto bg-dark-light/50 backdrop-blur-sm rounded-2xl p-10 border border-gray-700/50 shadow-xl mb-16">
+        <p class="text-xl md:text-2xl text-center font-medium leading-relaxed text-gray-200">
+          To deliver integrated technology solutions that empower businesses to operate efficiently, innovate confidently, and grow sustainably in the digital era.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-shield-alt text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Integrity</h3>
+          <p class="text-gray-300 mb-4">We uphold the highest standards of honesty, transparency, and ethical conduct in all our business relationships.</p>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Transparent communication</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Honest business practices</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Client confidentiality</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-rocket text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Innovation</h3>
+          <p class="text-gray-300 mb-4">We continuously explore, develop, and implement forward-thinking solutions that address evolving business needs.</p>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Cutting-edge technology</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Creative problem-solving</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Continuous improvement</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-award text-blue-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Excellence</h3>
+          <p class="text-gray-300 mb-4">We strive for the highest quality in everything we do, exceeding expectations and setting new standards of performance.</p>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Rigorous quality control</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Performance optimization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Customer satisfaction</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Our <span class="gradient-text">Services</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">We offer comprehensive technology solutions designed to elevate your business in the digital landscape.</p>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Service 1 -->
+        <div class="service-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="service-icon w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-network-wired text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Network Cabling & Smart Building Integration</h3>
+          <p class="text-gray-300 mb-6">
+            Future-proof infrastructure solutions that connect your entire organization with reliable, high-performance networks.
+          </p>
+          <ul class="space-y-2 text-gray-300 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-2"></i>
+              <span>Structured cabling systems</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-2"></i>
+              <span>Smart building automation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-2"></i>
+              <span>Network optimization</span>
+            </li>
+          </ul>
+          <a href="javascript:void(0)" class="inline-block px-6 py-3 bg-dark-lighter rounded-lg text-white hover:bg-primary transition-colors duration-300">
+            Learn More <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="service-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="service-icon w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-mobile-alt text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">App Development</h3>
+          <p class="text-gray-300 mb-6">
+            Custom mobile applications that enhance customer engagement and streamline business operations.
+          </p>
+          <ul class="space-y-2 text-gray-300 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+              <span>iOS & Android development</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+              <span>Cross-platform solutions</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+              <span>User experience design</span>
+            </li>
+          </ul>
+          <a href="javascript:void(0)" class="inline-block px-6 py-3 bg-dark-lighter rounded-lg text-white hover:bg-secondary transition-colors duration-300">
+            Learn More <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="service-icon w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-laptop-code text-blue-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Website Development</h3>
+          <p class="text-gray-300 mb-6">
+            Stunning, responsive websites that showcase your brand and convert visitors into customers.
+          </p>
+          <ul class="space-y-2 text-gray-300 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+              <span>Custom web design</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+              <span>E-commerce solutions</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+              <span>CMS implementation</span>
+            </li>
+          </ul>
+          <a href="javascript:void(0)" class="inline-block px-6 py-3 bg-dark-lighter rounded-lg text-white hover:bg-blue-500 transition-colors duration-300">
+            Learn More <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="service-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="service-icon w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-video text-purple-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">CCTV Installations</h3>
+          <p class="text-gray-300 mb-6">
+            Advanced surveillance systems that protect your assets and provide peace of mind.
+          </p>
+          <ul class="space-y-2 text-gray-300 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+              <span>HD camera systems</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+              <span>Remote monitoring</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+              <span>Smart integration</span>
+            </li>
+          </ul>
+          <a href="javascript:void(0)" class="inline-block px-6 py-3 bg-dark-lighter rounded-lg text-white hover:bg-purple-500 transition-colors duration-300">
+            Learn More <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="text-center mt-16">
+        <a href="#contact" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+          Get Started Today
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Background elements -->
+    <div class="absolute top-1/3 left-10 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl"></div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section id="why-us" class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Why <span class="gradient-text">Choose Us</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">What sets Taziki Solutions apart in the competitive technology landscape.</p>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Reason 1 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-tools text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Integrated Approach</h3>
+          <p class="text-gray-300 mb-4">
+            We don't just implement isolated solutions; we create cohesive technology ecosystems that work harmoniously.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Holistic technology strategy</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Cross-platform compatibility</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+              <span>Seamless system integration</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Reason 2 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+            <i class="fas fa-user-friends text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Client-Centric Focus</h3>
+          <p class="text-gray-300 mb-4">
+            Every solution we deliver is tailored to your specific business context, goals, and growth trajectory.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Personalized solutions</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Regular consultation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+              <span>Long-term partnerships</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Reason 3 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-calendar-check text-blue-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Timely Delivery</h3>
+          <p class="text-gray-300 mb-4">
+            We understand that time is crucial in business, which is why we commit to realistic timelines and meet them.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Efficient project management</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Clear communication</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+              <span>Milestone-based delivery</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Reason 4 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-code text-purple-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Technical Excellence</h3>
+          <p class="text-gray-300 mb-4">
+            Our team comprises skilled professionals who stay at the forefront of technological advancements.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-purple-500 mt-1 mr-2"></i>
+              <span>Expert development team</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-purple-500 mt-1 mr-2"></i>
+              <span>Industry best practices</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-purple-500 mt-1 mr-2"></i>
+              <span>Continuous learning culture</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Reason 5 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-rocket text-pink-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Future-Ready Solutions</h3>
+          <p class="text-gray-300 mb-4">
+            We build with scalability and adaptability in mind, ensuring your technology investments stand the test of time.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+              <span>Scalable architecture</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+              <span>Flexible integration points</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+              <span>Forward-compatible designs</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Reason 6 -->
+        <div class="why-us-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center mb-6">
+            <i class="fas fa-headset text-amber-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Dedicated Support</h3>
+          <p class="text-gray-300 mb-4">
+            Our relationship doesn't end at deployment—we provide ongoing support to ensure your systems continue to perform optimally.
+          </p>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+              <span>Responsive helpdesk</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+              <span>Regular maintenance</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-amber-500 mt-1 mr-2"></i>
+              <span>Performance monitoring</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Blog Section -->
+<section id="blog" class="py-20 relative overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Latest <span class="gradient-text">Insights</span></h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">Discover the latest trends, strategies, and insights from our technology experts.</p>
+      <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+    </div> 
+    
+    <!-- Search and filter (keep this) -->
+    <div class="max-w-4xl mx-auto mb-12">
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+          <input type="text" placeholder="Search articles..." class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        <div class="flex gap-2">
+          <select class="px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">All Categories</option>
+            <option value="technology">Technology Trends</option>
+            <option value="marketing">Digital Marketing</option>
+            <option value="cabling">Smart Cabling</option>
+            <option value="development">Web & App Development</option>
+            <option value="growth">Business Growth</option>
+          </select>
+          <button class="px-6 py-3 bg-primary rounded-lg text-white hover:bg-primary/90 transition-colors">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Blog Cards (keep these 3 preview cards) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Blog Post 1 -->
+      <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+        <div class="relative h-48 overflow-hidden">
+          <img src="images/blog-smart-buildings.jpg" alt="The Future of Smart Buildings" class="w-full h-full object-cover" loading="lazy">
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">Technology Trends</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors">
+            <a href="blog/smart-buildings.html">The Future of Smart Buildings: Integration for Maximum Efficiency</a>
+          </h3>
+          <p class="text-gray-300 mb-4 line-clamp-3">
+            Discover how integrated smart building technologies are revolutionizing commercial spaces, improving energy efficiency, and enhancing user experience.
+          </p>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2 text-sm text-gray-400">
+              <i class="far fa-calendar"></i>
+              <span>June 12, 2025</span>
+            </div>
+            <a href="blog/smart-buildings.html" class="text-primary hover:underline font-medium">Read More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Post 2 -->
+      <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+        <div class="relative h-48 overflow-hidden">
+          <img src="images/blog-web-development.jpg" alt="Web Development Trends" class="w-full h-full object-cover" loading="lazy">
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 bg-secondary/90 text-white text-xs font-bold rounded-full">Web Development</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-3 hover:text-secondary transition-colors">
+            <a href="blog/web-development-trends.html">5 Web Development Trends That Will Dominate 2025</a>
+          </h3>
+          <p class="text-gray-300 mb-4 line-clamp-3">
+            Stay ahead of the curve with our analysis of emerging web technologies that are reshaping user experiences and business capabilities.
+          </p>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2 text-sm text-gray-400">
+              <i class="far fa-calendar"></i>
+              <span>May 28, 2025</span>
+            </div>
+            <a href="blog/web-development-trends.html" class="text-secondary hover:underline font-medium">Read More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Post 3 -->
+      <div class="blog-card bg-dark-light/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg">
+        <div class="relative h-48 overflow-hidden">
+          <img src="images/blog-app-development.jpg" alt="App Development Guide" class="w-full h-full object-cover" loading="lazy">
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 bg-blue-500/90 text-white text-xs font-bold rounded-full">App Development</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-3 hover:text-blue-500 transition-colors">
+            <a href="blog/app-development-guide.html">From Concept to Launch: A Guide to Successful App Development</a>
+          </h3>
+          <p class="text-gray-300 mb-4 line-clamp-3">
+            Learn the essential steps to transform your app idea into a market-ready product that users will love and adopt.
+          </p>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2 text-sm text-gray-400">
+              <i class="far fa-calendar"></i>
+              <span>May 15, 2025</span>
+            </div>
+            <a href="blog/app-development-guide.html" class="text-blue-500 hover:underline font-medium">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View All Articles Button (keep this) -->
+    <div class="text-center mt-16">
+      <a href="blog/index.html" class="btn-secondary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+        View All Articles
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+    
+    <!-- Background elements -->
+    <div class="absolute top-1/3 right-10 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-1/4 left-10 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl"></div>
+  </section>
+
+  <!-- Contact/Footer Section -->
+<!-- Contact/Footer Section -->
+<footer id="contact" class="pt-20 pb-10 gradient-bg">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-5 space-y-6">
+        <h2 class="text-3xl font-bold font-poppins mb-6">Get in <span class="gradient-text">Touch</span></h2>
+        <p class="text-gray-300 mb-8">
+          Have questions or ready to start your next project? Contact us today and let's discuss how Taziki Solutions can help you achieve your technology goals.
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="mr-4 mt-1">
+              <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <i class="fas fa-envelope text-primary"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Email</h3>
+              <p class="text-gray-300">info@tazikisolutions.com</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="mr-4 mt-1">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                <i class="fas fa-phone text-secondary"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Phone</h3>
+              <p class="text-gray-300">+254 714 294 223</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="mr-4 mt-1">
+              <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-blue-500"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Location</h3>
+              <p class="text-gray-300">Nairobi, Kenya</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pt-6">
+          <h3 class="font-semibold mb-4">Connect With Us</h3>
+          <div class="flex space-x-4">
+            <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-7">
+        <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
+          <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
+          <form>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                <input type="text" id="name" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                <input type="email" id="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            
+            <div class="mb-6">
+              <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
+              Send Message
+              <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-700/50 pt-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-3 space-y-4">
+          <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
+          <p class="text-gray-300 text-sm">
+            Empowering businesses through integrated technology solutions since 2020.
+          </p>
+        </div>
+        
+        <div class="md:col-span-2 space-y-4">
+          <h3 class="font-semibold mb-4">Services</h3>
+          <ul class="space-y-2">
+            <li><a href="#services" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
+            <li><a href="#services" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
+            <li><a href="#services" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
+            <li><a href="#services" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-2 space-y-4">
+          <h3 class="font-semibold mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li><a href="#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
+            <li><a href="#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
+            <li><a href="#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
+            <li><a href="#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-2 space-y-4">
+          <h3 class="font-semibold mb-4">Resources</h3>
+          <ul class="space-y-2">
+            <li><a href="#blog" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-3 space-y-4">
+          <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
+          <p class="text-gray-300 text-sm">
+            Stay updated with our latest insights and news.
+          </p>
+          <div class="flex">
+            <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+            <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          
+          <!-- Admin Link - Added here -->
+          <div class="pt-4 mt-4 border-t border-gray-700/30">
+            <a href="/admin/" class="text-gray-400 hover:text-primary text-sm transition-colors flex items-center gap-2">
+              <i class="fas fa-lock text-xs"></i>
+              Admin Access
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center text-gray-500 text-sm mt-12">
+        <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <!-- AI Chatbot -->
+  <div x-data="{ chatOpen: false }" class="fixed bottom-8 right-8 z-50">
+    <!-- Chat Button -->
+    <button 
+      @click="chatOpen = !chatOpen" 
+      class="bg-primary w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+    >
+      <i x-show="!chatOpen" class="fas fa-comment-dots text-white text-2xl"></i>
+      <i x-show="chatOpen" class="fas fa-times text-white text-2xl"></i>
+    </button>
+    
+    <!-- Chat Window -->
+    <div 
+      x-show="chatOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform scale-90"
+      x-transition:enter-end="opacity-100 transform scale-100"
+      x-transition:leave="transition ease-in duration-300"
+      x-transition:leave-start="opacity-100 transform scale-100"
+      x-transition:leave-end="opacity-0 transform scale-90"
+      class="absolute bottom-20 right-0 w-80 md:w-96 bg-dark rounded-2xl shadow-2xl chatbox-shadow overflow-hidden"
+    >
+      <div class="bg-dark-light p-4 flex justify-between items-center border-b border-dark-lighter">
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+            <i class="fas fa-robot text-primary"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Taziki AI Assistant</h3>
+            <div class="flex items-center">
+              <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+              <span class="text-xs text-gray-400">Online</span>
+            </div>
+          </div>
+        </div>
+        <button @click="chatOpen = false" class="text-gray-500 hover:text-white">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="h-80 overflow-y-auto p-4 space-y-4" id="chatMessages">
+        <div class="flex items-start mb-4">
+          <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
+            <i class="fas fa-robot text-primary text-xs"></i>
+          </div>
+          <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">Hi there! I'm Taziki's AI assistant. How can I help you today?</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 bg-dark-lighter border-t border-gray-700/50">
+        <form id="chatForm" class="flex">
+          <input
+            type="text"
+            placeholder="Type your question here..."
+            class="flex-1 px-4 py-2 bg-dark-light border border-gray-700 rounded-l-lg text-white focus:outline-none"
+            id="chatInput"
+          >
+          <button type="submit" class="bg-primary px-4 py-2 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script id="app-script">
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Navbar background change on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('header');
+      if (window.scrollY > 100) {
+        navbar.classList.add('bg-dark/90');
+        navbar.classList.remove('bg-dark/80');
+      } else {
+        navbar.classList.remove('bg-dark/90');
+        navbar.classList.add('bg-dark/80');
+      }
+    });
+    
+    // Chatbot functionality
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    if (chatForm) {
+      chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        if (message === '') return;
+        
+        // Add user message
+        addMessage('user', message);
+        chatInput.value = '';
+        
+        // Simulate AI response
+        setTimeout(() => {
+          let response = getBotResponse(message);
+          addMessage('bot', response);
+          
+          // Scroll to bottom
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+      });
+    }
+    
+    function addMessage(type, message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'flex items-start mb-4';
+      
+      if (type === 'bot') {
+        messageDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
+            <i class="fas fa-robot text-primary text-xs"></i>
+          </div>
+          <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">${message}</p>
+          </div>
+        `;
+      } else {
+        messageDiv.innerHTML = `
+          <div class="ml-auto bg-secondary/20 rounded-lg rounded-tr-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">${message}</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center ml-2 flex-shrink-0">
+            <i class="fas fa-user text-secondary text-xs"></i>
+          </div>
+        `;
+      }
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function getBotResponse(message) {
+      message = message.toLowerCase();
+      
+      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return "Hello! How can I help you today?";
+      } 
+      else if (message.includes('about') || message.includes('company')) {
+        return "Taziki Solutions is a forward-thinking digital technology company specializing in integrated IT services for modern businesses. We deliver cutting-edge solutions in network infrastructure, app development, web design, and security systems.";
+      } 
+      else if (message.includes('service')) {
+        return "We offer several services including Network Cabling & Smart Building Integration, App Development, Website Development, and CCTV Installations. Which would you like to know more about?";
+      }
+      else if (message.includes('network') || message.includes('cabling')) {
+        return "Our Network Cabling & Smart Building Integration services provide future-proof infrastructure solutions that connect your entire organization with reliable, high-performance networks.";
+      }
+      else if (message.includes('app') || message.includes('mobile')) {
+        return "Our App Development team creates custom mobile applications that enhance customer engagement and streamline business operations for both iOS and Android platforms.";
+      }
+      else if (message.includes('web') || message.includes('website')) {
+        return "Our Website Development services deliver stunning, responsive websites that showcase your brand and convert visitors into customers with modern design principles.";
+      }
+      else if (message.includes('cctv') || message.includes('camera') || message.includes('security')) {
+        return "Our CCTV Installation services provide advanced surveillance systems that protect your assets and provide peace of mind with HD camera systems and remote monitoring capabilities.";
+      }
+      else if (message.includes('price') || message.includes('cost') || message.includes('pricing')) {
+        return "Our pricing varies based on project requirements and scope. I'd be happy to arrange a consultation with our team to provide you with a customized quote. Would you like us to contact you?";
+      }
+      else if (message.includes('location') || message.includes('where')) {
+        return "We're based in Nairobi, Kenya, but we serve clients throughout East Africa.";
+      }
+      else if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+        return "You can contact us via email at info@tazikisolutions.co.ke or by phone at +254 700 000000. Would you like me to help you schedule a consultation?";
+      }
+      else if (message.includes('blog') || message.includes('article')) {
+        return "Our latest blog posts include 'The Future of Smart Buildings', '5 Web Development Trends That Will Dominate 2025', and 'From Concept to Launch: A Guide to Successful App Development'. Would you like to read any of these?";
+      }
+      else {
+       return "I'm here to help! Ask me about Taziki Solutions' services, company information, pricing, or anything else you'd like to know!";
+      }
+    }
+  </script>
