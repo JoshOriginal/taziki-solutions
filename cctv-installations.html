@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CCTV Installation Services | Taziki Solutions</title>
+  <meta name="description" content="Secure your property with smart, high-definition CCTV systems for homes and businesses.">
+  
+  <!-- Preconnect for external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Preload critical font -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  
+  <!-- Load fonts with optimization -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  
+  <!-- External resources -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Fallback for no JavaScript -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  </noscript>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F97316',
+            secondary: '#16A34A',
+            dark: '#0f172a',
+            'dark-light': '#1e293b',
+            'dark-lighter': '#334155'
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'poppins': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style id="app-style">
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero-gradient {
+      background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 70%),
+                 radial-gradient(circle at bottom left, rgba(22, 163, 74, 0.15), transparent 70%);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #F97316, #F97316);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #ea580c, #F97316);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(90deg, #16A34A, #16A34A);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: linear-gradient(90deg, #15803d, #16A34A);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
+    }
+    
+    .service-card {
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+    }
+    
+    .service-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .why-us-card {
+      transition: all 0.3s ease;
+    }
+    
+    .why-us-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .blog-card {
+      transition: all 0.3s ease;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    .animate-pulse-slow {
+      animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .chatbox-shadow {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Navbar styles */
+    .navbar-fixed {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .navbar-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-link:hover {
+      color: #F97316;
+    }
+    
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Mobile menu animation */
+    .mobile-menu {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: top;
+    }
+    
+    .mobile-menu.hidden {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    
+    /* Pricing Card Styles */
+    .pricing-card {
+      transition: all 0.3s ease;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .pricing-card.popular {
+      border: 2px solid #8B5CF6;
+    }
+    
+    /* Breadcrumb Styles */
+    .breadcrumb {
+      padding: 1rem 0;
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb a {
+      color: #F97316;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: #16A34A;
+    }
+    
+    .breadcrumb span {
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans">
+  <!-- Header/Navigation -->
+  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="index.html" class="text-2xl md:text-3xl font-bold font-poppins">
+            <span class="text-primary">Taziki</span><span class="text-white">Solutions</span>
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
+          <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
+          <a href="index.html#about" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">About</a>
+          <a href="index.html#services" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Services</a>
+          <a href="index.html#why-us" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Why Choose Us</a>
+          <a href="index.html#blog" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
+          <a href="index.html#contact" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Contact</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <div class="-mr-2 flex items-center md:hidden">
+          <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-lighter focus:outline-none">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path :class="{'hidden': open, 'inline-flex': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path :class="{'inline-flex': open, 'hidden': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
+        <a href="index.html#about" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">About</a>
+        <a href="index.html#services" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Services</a>
+        <a href="index.html#why-us" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Why Choose Us</a>
+        <a href="index.html#blog" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
+        <a href="index.html#contact" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <section class="pt-24 pb-6 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> > 
+        <a href="index.html#services">Services</a> > 
+        <span>CCTV Installations</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
+            See Everything. Protect <span class="gradient-text">What Matters.</span>
+          </h1>
+          <p class="text-xl text-gray-300 max-w-2xl">
+            Advanced CCTV systems that give you peace of mind with high-definition monitoring, remote access, and smart alerts.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a href="#contact" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+              Book Installation
+              <i class="fas fa-calendar ml-2"></i>
+            </a>
+            <a href="#contact" class="btn-secondary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+              Request a Quote
+              <i class="fas fa-quote-left ml-2"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:flex justify-center">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
+            <img src="images/cctv-installation.jpg" alt="CCTV Installation" class="relative z-10 rounded-lg shadow-2xl animate-float transform h-[400px] w-[600px] object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-6 text-secondary">Service Overview</h2>
+          <p class="text-lg text-gray-300">
+            We install high-definition CCTV systems with remote access, cloud storage, and smart alerts — perfect for homes, offices, or large properties. Our surveillance solutions provide comprehensive coverage and advanced features to keep your property secure.
+          </p>
+          <p class="text-lg text-gray-300">
+            From basic home security to enterprise-grade surveillance systems, we design and install CCTV solutions that meet your specific security needs and budget requirements.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                  <i class="fas fa-hd-video text-primary"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">HD Camera Systems</h3>
+                <p class="text-gray-300 text-sm">Crystal clear 1080p and 4K resolution</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                  <i class="fas fa-mobile-alt text-secondary"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Remote Monitoring</h3>
+                <p class="text-gray-300 text-sm">View your cameras from anywhere</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                  <i class="fas fa-cloud text-blue-500"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Cloud Storage</h3>
+                <p class="text-gray-300 text-sm">Secure footage storage in the cloud</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+                  <i class="fas fa-bell text-purple-500"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Smart Alerts</h3>
+                <p class="text-gray-300 text-sm">Instant notifications for motion detection</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex justify-center">
+          <div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full blur-3xl"></div>
+          <img src="images/security-camera.jpg" alt="Security Camera Installation" class="relative z-10 rounded-lg shadow-2xl h-[500px] w-full object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CCTV Features -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Advanced <span class="gradient-text">Features</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Comprehensive security features for complete peace of mind</p>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-video text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">24/7 Recording</h3>
+          <p class="text-gray-300">Continuous recording with motion-activated alerts to capture every important moment.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-wifi text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Wireless Options</h3>
+          <p class="text-gray-300">Flexible installation with wireless camera options for hard-to-reach areas.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-moon text-blue-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Night Vision</h3>
+          <p class="text-gray-300">Infrared night vision capabilities for clear monitoring even in complete darkness.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-wind text-purple-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Weather Resistant</h3>
+          <p class="text-gray-300">Outdoor cameras built to withstand harsh weather conditions and extreme temperatures.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-database text-green-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Multiple Storage</h3>
+          <p class="text-gray-300">Flexible storage options including local DVR, cloud storage, and network storage.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-shield text-amber-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Access Control</h3>
+          <p class="text-gray-300">Multi-user access with different permission levels for family members or staff.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing & Packages -->
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Pricing & <span class="gradient-text">Packages</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Choose the perfect security solution for your property</p>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Home Package -->
+        <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">Home Package</h3>
+            <div class="text-3xl font-bold text-primary mb-2">KES 30,000</div>
+            <p class="text-gray-300">4 HD cameras + DVR setup</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>4 HD weatherproof cameras</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>4-channel DVR system</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Night vision capability</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Mobile app access</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-times text-gray-500 mt-1 mr-3"></i>
+              <span class="text-gray-500">No cloud storage</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-times text-gray-500 mt-1 mr-3"></i>
+              <span class="text-gray-500">Basic motion detection</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
+            Get Started
+          </a>
+        </div>
+        
+        <!-- Office Package -->
+        <div class="pricing-card pricing-card popular bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border-2 border-purple-500 shadow-lg relative">
+          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <span class="bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
+          </div>
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">Office Package</h3>
+            <div class="text-3xl font-bold text-primary mb-2">KES 65,000</div>
+            <p class="text-gray-300">8 HD cameras + mobile monitoring</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>8 HD cameras (indoor & outdoor)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>8-channel NVR system</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Advanced night vision</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Mobile & desktop monitoring</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Cloud storage (30 days)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Smart motion alerts</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
+            Get Started
+          </a>
+        </div>
+        
+        <!-- Enterprise Package -->
+        <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">Enterprise Package</h3>
+            <div class="text-3xl font-bold text-primary mb-2">From KES 120,000</div>
+            <p class="text-gray-300">16+ cameras with smart integration</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>16+ 4K cameras</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Enterprise-grade NVR system</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Advanced analytics & AI features</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Multi-site monitoring</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>Extended cloud storage (90 days)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-primary mt-1 mr-3"></i>
+              <span>24/7 professional monitoring</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
+            Get Custom Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offers & Discounts -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Special <span class="gradient-text">Offers</span></h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4">
+                <span class="text-2xl">🔒</span>
+              </div>
+              <h3 class="text-xl font-bold">Free Site Visit</h3>
+            </div>
+            <p class="text-gray-300">
+              Get a free professional site assessment for installations over KES 50,000. Our experts will evaluate your property and recommend the optimal camera placement for maximum security coverage.
+            </p>
+          </div>
+          
+          <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
+                <span class="text-2xl">🎥</span>
+              </div>
+              <h3 class="text-xl font-bold">15% Bundle Discount</h3>
+            </div>
+            <p class="text-gray-300">
+              Save 15% when you bundle CCTV installation with our networking services. Create a complete security and connectivity solution for your home or business.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="contact" class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-6">Ready to Secure Your Property?</h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Contact us today for a free security assessment and discover how our CCTV installation services can give you complete peace of mind.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#contact" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+            Book Installation
+            <i class="fas fa-calendar ml-2"></i>
+          </a>
+          <a href="#contact" class="btn-secondary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
+            Request a Quote
+            <i class="fas fa-quote-left ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-20 pb-10 gradient-bg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
+        <div class="lg:col-span-5 space-y-6">
+          <h2 class="text-3xl font-bold font-poppins mb-6">Get in <span class="gradient-text">Touch</span></h2>
+          <p class="text-gray-300 mb-8">
+            Have questions about our CCTV installation services? Contact us today for expert security solutions.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                  <i class="fas fa-envelope text-primary"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Email</h3>
+                <p class="text-gray-300">info@tazikisolutions.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                  <i class="fas fa-phone text-secondary"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Phone</h3>
+                <p class="text-gray-300">+254 714 294 223</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="mr-4 mt-1">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                  <i class="fas fa-map-marker-alt text-blue-500"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">Location</h3>
+                <p class="text-gray-300">Nairobi, Kenya</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-7">
+          <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
+            <h3 class="text-2xl font-bold mb-6">Get Your Security Assessment</h3>
+            <form>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                  <input type="text" id="name" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                  <input type="email" id="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <label for="property-type" class="block text-sm font-medium text-gray-300 mb-2">Property Type</label>
+                <select id="property-type" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                  <option value="">Select property type</option>
+                  <option value="home">Residential Home</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="office">Office Building</option>
+                  <option value="commercial">Commercial Property</option>
+                  <option value="industrial">Industrial Facility</option>
+                </select>
+              </div>
+              
+              <div class="mb-6">
+                <label for="property-size" class="block text-sm font-medium text-gray-300 mb-2">Property Size</label>
+                <select id="property-size" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                  <option value="">Select size</option>
+                  <option value="small">Small (1-2 rooms)</option>
+                  <option value="medium">Medium (3-5 rooms)</option>
+                  <option value="large">Large (6+ rooms)</option>
+                  <option value="commercial">Commercial Building</option>
+                </select>
+              </div>
+              
+              <div class="mb-6">
+                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Security Requirements</label>
+                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tell us about your security concerns and requirements..."></textarea>
+              </div>
+              
+              <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
+                Request Security Assessment
+                <i class="fas fa-shield-alt ml-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700/50 pt-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-3 space-y-4">
+            <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
+            <p class="text-gray-300 text-sm">
+              Empowering businesses through integrated technology solutions since 2020.
+            </p>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Services</h3>
+            <ul class="space-y-2">
+              <li><a href="network-cabling.html" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
+              <li><a href="app-development.html" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
+              <li><a href="website-development.html" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
+              <li><a href="cctv-installations.html" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Company</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
+              <li><a href="index.html#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
+              <li><a href="index.html#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
+              <li><a href="index.html#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="font-semibold mb-4">Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html#blog" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
+              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
+              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
+              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-3 space-y-4">
+            <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
+            <p class="text-gray-300 text-sm">
+              Stay updated with our latest insights and news.
+            </p>
+            <div class="flex">
+              <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+              <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center text-gray-500 text-sm mt-12">
+          <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chatbot -->
+  <div x-data="{ chatOpen: false }" class="fixed bottom-8 right-8 z-50">
+    <!-- Chat Button -->
+    <button 
+      @click="chatOpen = !chatOpen" 
+      class="bg-primary w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+    >
+      <i x-show="!chatOpen" class="fas fa-comment-dots text-white text-2xl"></i>
+      <i x-show="chatOpen" class="fas fa-times text-white text-2xl"></i>
+    </button>
+    
+    <!-- Chat Window -->
+    <div 
+      x-show="chatOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform scale-90"
+      x-transition:enter-end="opacity-100 transform scale-100"
+      x-transition:leave="transition ease-in duration-300"
+      x-transition:leave-start="opacity-100 transform scale-100"
+      x-transition:leave-end="opacity-0 transform scale-90"
+      class="absolute bottom-20 right-0 w-80 md:w-96 bg-dark rounded-2xl shadow-2xl chatbox-shadow overflow-hidden"
+    >
+      <div class="bg-dark-light p-4 flex justify-between items-center border-b border-dark-lighter">
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+            <i class="fas fa-robot text-primary"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Taziki AI Assistant</h3>
+            <div class="flex items-center">
+              <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+              <span class="text-xs text-gray-400">Online</span>
+            </div>
+          </div>
+        </div>
+        <button @click="chatOpen = false" class="text-gray-500 hover:text-white">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="h-80 overflow-y-auto p-4 space-y-4" id="chatMessages">
+        <div class="flex items-start mb-4">
+          <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
+            <i class="fas fa-robot text-primary text-xs"></i>
+          </div>
+          <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">Hi there! I'm Taziki's AI assistant. How can I help you with our CCTV installation services today?</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 bg-dark-lighter border-t border-gray-700/50">
+        <form id="chatForm" class="flex">
+          <input
+            type="text"
+            placeholder="Ask about CCTV installation..."
+            class="flex-1 px-4 py-2 bg-dark-light border border-gray-700 rounded-l-lg text-white focus:outline-none"
+            id="chatInput"
+          >
+          <button type="submit" class="bg-primary px-4 py-2 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Navbar background change on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('header');
+      if (window.scrollY > 100) {
+        navbar.classList.add('bg-dark/90');
+        navbar.classList.remove('bg-dark/80');
+      } else {
+        navbar.classList.remove('bg-dark/90');
+        navbar.classList.add('bg-dark/80');
+      }
+    });
+  </script>
+</body>
+</html>
