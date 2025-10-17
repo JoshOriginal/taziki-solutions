@@ -1,881 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>App Development | Taziki Solutions</title>
-  <meta name="description" content="Custom iOS and Android app development to engage your customers and streamline your operations.">
-
-  <!-- Favicons for all devices -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#F97316">
-  
-  <!-- Preconnect for external resources -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  
-  <!-- Preload critical font -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
-  
-  <!-- Load fonts with optimization -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  
-  <!-- External resources -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-  <!-- Fallback for no JavaScript -->
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
-  </noscript>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#F97316',
-            secondary: '#16A34A',
-            dark: '#0f172a',
-            'dark-light': '#1e293b',
-            'dark-lighter': '#334155'
-          },
-          fontFamily: {
-            'sans': ['Inter', 'sans-serif'],
-            'poppins': ['Poppins', 'sans-serif']
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Taziki Solutions</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      }
-    }
-  </script>
-  <style id="app-style">
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
-    
-    .gradient-text {
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .hero-gradient {
-      background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 70%),
-                 radial-gradient(circle at bottom left, rgba(22, 163, 74, 0.15), transparent 70%);
-    }
-    
-    .btn-primary {
-      background: linear-gradient(90deg, #F97316, #F97316);
-      transition: all 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-      background: linear-gradient(90deg, #ea580c, #F97316);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
-    }
-    
-    .btn-secondary {
-      background: linear-gradient(90deg, #16A34A, #16A34A);
-      transition: all 0.3s ease;
-    }
-    
-    .btn-secondary:hover {
-      background: linear-gradient(90deg, #15803d, #16A34A);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
-    }
-    
-    .service-card {
-      transition: all 0.3s ease;
-    }
-    
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    .service-card:hover .service-icon {
-      transform: scale(1.1);
-    }
-    
-    .service-icon {
-      transition: all 0.3s ease;
-    }
-    
-    .why-us-card {
-      transition: all 0.3s ease;
-    }
-    
-    .why-us-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    .blog-card {
-      transition: all 0.3s ease;
-    }
-    
-    .blog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
-    }
-
-    .animate-pulse-slow {
-      animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    .chatbox-shadow {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-    
-    /* Navbar styles */
-    .navbar-fixed {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    
-    .navbar-link {
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .navbar-link:hover {
-      color: #F97316;
-    }
-    
-    .navbar-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      transition: width 0.3s ease;
-    }
-    
-    .navbar-link:hover::after {
-      width: 100%;
-    }
-    
-    /* Mobile menu animation */
-    .mobile-menu {
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: top;
-    }
-    
-    .mobile-menu.hidden {
-      transform: scaleY(0);
-      opacity: 0;
-    }
-    
-    /* Pricing Card Styles */
-    .pricing-card {
-      transition: all 0.3s ease;
-    }
-    
-    .pricing-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-    
-    .pricing-card.popular {
-      border: 2px solid #16A34A;
-    }
-    
-    /* Breadcrumb Styles */
-    .breadcrumb {
-      padding: 1rem 0;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #F97316;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #16A34A;
-    }
-    
-    .breadcrumb span {
-      color: #94a3b8;
-    }
-  </style>
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .privacy-content {
+            background-color: white;
+            padding: 60px 0;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .privacy-section {
+            margin-bottom: 40px;
+        }
+        
+        .privacy-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .privacy-section p {
+            margin-bottom: 15px;
+        }
+        
+        .privacy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .privacy-section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #3498db;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+            }
+        }
+    </style>
 </head>
-<body class="min-h-screen font-sans">
-  <!-- Header/Navigation -->
-  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0 flex items-center">
-          <a href="index.html" class="text-2xl md:text-3xl font-bold font-poppins">
-            <span class="text-primary">Taziki</span><span class="text-white">Solutions</span>
-          </a>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Taziki <span>Solutions</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="website-development.html">Web Development</a></li>
+                    <li><a href="app-development.html">App Development</a></li>
+                    <li><a href="network-cabling.html">Network Cabling</a></li>
+                    <li><a href="cctv-installations.html">CCTV Installations</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
-          <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
-          <a href="index.html#about" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">About</a>
-          <a href="index.html#services" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Services</a>
-          <a href="index.html#why-us" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Why Choose Us</a>
-          <a href="index.html#blog" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
-          <a href="index.html#contact" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Contact</a>
-        </nav>
-        
-        <!-- Mobile menu button -->
-        <div class="-mr-2 flex items-center md:hidden">
-          <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-lighter focus:outline-none">
-            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-              <path :class="{'hidden': open, 'inline-flex': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              <path :class="{'inline-flex': open, 'hidden': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mobile menu -->
-    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
-        <a href="index.html#about" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">About</a>
-        <a href="index.html#services" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Services</a>
-        <a href="index.html#why-us" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Why Choose Us</a>
-        <a href="index.html#blog" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
-        <a href="index.html#contact" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Contact</a>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Breadcrumb -->
-  <section class="pt-24 pb-6 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="breadcrumb">
-        <a href="index.html">Home</a> > 
-        <a href="index.html#services">Services</a> > 
-        <span>App Development</span>
-      </div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us. Learn how we collect, use, and protect your information.</p>
+        </div>
+    </section>
 
-  <!-- Hero Section -->
-  <section class="hero-gradient py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div class="space-y-6">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
-            Turn Your Idea Into a <span class="gradient-text">Powerful App</span>
-          </h1>
-          <p class="text-xl text-gray-300 max-w-2xl">
-            From concept to launch, we build mobile apps that deliver real results and engage your customers.
-          </p>
-          <div class="pt-4 flex flex-wrap gap-4">
-            <a href="#contact" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
-              Book Consultation
-              <i class="fas fa-calendar ml-2"></i>
-            </a>
-            <a href="#contact" class="btn-secondary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
-              Request a Demo
-              <i class="fas fa-play ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <div class="hidden lg:flex justify-center">
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-            <img src="images/app-development.jpg" alt="Mobile App Development" class="relative z-10 rounded-lg shadow-2xl animate-float transform h-[400px] w-[600px] object-cover">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Privacy Policy Content -->
+    <section class="privacy-content">
+        <div class="container">
+            <div class="privacy-section">
+                <h2>Introduction</h2>
+                <p>At Taziki Solutions, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.</p>
+                <p>Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site or use our services.</p>
+            </div>
 
-  <!-- Service Overview -->
-  <section class="py-20 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div class="space-y-6">
-          <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-6 text-secondary">Service Overview</h2>
-          <p class="text-lg text-gray-300">
-            We develop custom mobile applications for Android and iOS, designed to improve customer engagement and simplify your workflow. Our team transforms your vision into a polished, high-performing app that delivers exceptional user experiences.
-          </p>
-          <p class="text-lg text-gray-300">
-            From initial concept and design to development, testing, and deployment, we handle every aspect of the app creation process. Our solutions are built with scalability in mind, ensuring your app can grow alongside your business.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                  <i class="fab fa-apple text-primary"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">iOS Development</h3>
-                <p class="text-gray-300 text-sm">Native iOS apps for iPhone and iPad</p>
-              </div>
+            <div class="privacy-section">
+                <h2>Information We Collect</h2>
+                <p>We may collect information about you in a variety of ways. The information we may collect includes:</p>
+                
+                <h3>Personal Data</h3>
+                <p>Personally identifiable information, such as your name, email address, telephone number, and company details, that you voluntarily give to us when you register with us or when you choose to participate in various activities related to our services.</p>
+                
+                <h3>Derivative Data</h3>
+                <p>Information our servers automatically collect when you access our services, such as your IP address, browser type, operating system, access times, and the pages you have viewed directly before and after accessing our services.</p>
+                
+                <h3>Financial Data</h3>
+                <p>Financial information, such as data related to your payment method (e.g., valid credit card number, card brand, expiration date) that we may collect when you purchase, order, return, exchange, or request information about our services.</p>
             </div>
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                  <i class="fab fa-android text-secondary"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Android Development</h3>
-                <p class="text-gray-300 text-sm">Native Android apps for all devices</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <i class="fas fa-mobile text-blue-500"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Cross-Platform</h3>
-                <p class="text-gray-300 text-sm">React Native & Flutter solutions</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-                  <i class="fas fa-paint-brush text-purple-500"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">UI/UX Design</h3>
-                <p class="text-gray-300 text-sm">Beautiful, intuitive user interfaces</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="relative flex justify-center">
-          <div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full blur-3xl"></div>
-          <img src="images/app-design.jpg" alt="App Design Process" class="relative z-10 rounded-lg shadow-2xl h-[500px] w-full object-cover">
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Development Process -->
-  <section class="py-20 relative overflow-hidden">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Our Development <span class="gradient-text">Process</span></h2>
-        <p class="text-gray-300 max-w-2xl mx-auto">A structured approach to delivering exceptional mobile applications</p>
-        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-lightbulb text-primary text-2xl"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-2">1. Discovery</h3>
-          <p class="text-gray-300">We analyze your requirements and define project scope</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-20 h-20 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-pencil-ruler text-secondary text-2xl"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-2">2. Design</h3>
-          <p class="text-gray-300">Create wireframes and design the user interface</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-20 h-20 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-code text-blue-500 text-2xl"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-2">3. Development</h3>
-          <p class="text-gray-300">Build the app with clean, maintainable code</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-20 h-20 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-rocket text-purple-500 text-2xl"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-2">4. Launch</h3>
-          <p class="text-gray-300">Deploy to app stores and provide ongoing support</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="privacy-section">
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect in the following ways:</p>
+                <ul>
+                    <li>To provide, operate, and maintain our services</li>
+                    <li>To improve, personalize, and expand our services</li>
+                    <li>To understand and analyze how you use our services</li>
+                    <li>To develop new products, services, features, and functionality</li>
+                    <li>To communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the service, and for marketing and promotional purposes</li>
+                    <li>To process your transactions and manage your orders</li>
+                    <li>To send you text messages and push notifications</li>
+                    <li>To find and prevent fraud</li>
+                    <li>For compliance purposes, including enforcing our Terms of Service, or other legal rights</li>
+                </ul>
+            </div>
 
-  <!-- Pricing & Packages -->
-  <section class="py-20 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Pricing & <span class="gradient-text">Packages</span></h2>
-        <p class="text-gray-300 max-w-2xl mx-auto">Choose the perfect solution for your app development needs</p>
-        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Starter App -->
-        <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold mb-2">Starter App</h3>
-            <div class="text-3xl font-bold text-primary mb-2">KES 45,000</div>
-            <p class="text-gray-300">Android app with 3 key features</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Single platform (Android)</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>3 core features</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Basic UI/UX design</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>App store deployment</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-times text-gray-500 mt-1 mr-3"></i>
-              <span class="text-gray-500">No backend integration</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-times text-gray-500 mt-1 mr-3"></i>
-              <span class="text-gray-500">No payment integration</span>
-            </li>
-          </ul>
-          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
-            Get Started
-          </a>
-        </div>
-        
-        <!-- Business App -->
-        <div class="pricing-card pricing-card popular bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border-2 border-secondary shadow-lg relative">
-          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <span class="bg-secondary text-white px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
-          </div>
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold mb-2">Business App</h3>
-            <div class="text-3xl font-bold text-primary mb-2">KES 95,000</div>
-            <p class="text-gray-300">Cross-platform with payment & admin features</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Cross-platform (iOS & Android)</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>5-7 core features</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Custom UI/UX design</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Payment integration</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Admin dashboard</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Basic backend API</span>
-            </li>
-          </ul>
-          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
-            Get Started
-          </a>
-        </div>
-        
-        <!-- Enterprise App -->
-        <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold mb-2">Enterprise App</h3>
-            <div class="text-3xl font-bold text-primary mb-2">From KES 180,000</div>
-            <p class="text-gray-300">Full custom app with integrations & support</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Cross-platform development</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Unlimited features</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Premium UI/UX design</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Advanced integrations</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Custom backend development</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check text-primary mt-1 mr-3"></i>
-              <span>Ongoing support & maintenance</span>
-            </li>
-          </ul>
-          <a href="#contact" class="btn-primary w-full text-center block px-6 py-3 rounded-lg text-white font-medium transition-colors duration-300">
-            Get Custom Quote
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="privacy-section">
+                <h2>Disclosure of Your Information</h2>
+                <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
+                
+                <h3>By Law or to Protect Rights</h3>
+                <p>If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.</p>
+                
+                <h3>Third-Party Service Providers</h3>
+                <p>We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</p>
+                
+                <h3>Business Transfers</h3>
+                <p>We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</p>
+            </div>
 
-  <!-- Offers & Discounts -->
-  <section class="py-20 relative overflow-hidden">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Special <span class="gradient-text">Offers</span></h2>
-        <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
-      </div>
-      
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4">
-                <span class="text-2xl">💡</span>
-              </div>
-              <h3 class="text-xl font-bold">Free UI Design Bundle</h3>
+            <div class="privacy-section">
+                <h2>Security of Your Information</h2>
+                <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Note:</strong> Any information disclosed online is vulnerable to interception and misuse by unauthorized parties. Therefore, we cannot guarantee complete security if you provide personal information.</p>
+                </div>
             </div>
-            <p class="text-gray-300">
-              Get free app UI design services when you bundle your mobile app development with a website project. Create a consistent brand experience across all platforms.
-            </p>
-          </div>
-          
-          <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
-                <span class="text-2xl">🔥</span>
-              </div>
-              <h3 class="text-xl font-bold">3 Months Maintenance</h3>
-            </div>
-            <p class="text-gray-300">
-              Receive 3 months of discounted maintenance and support after your app launch. We'll ensure everything runs smoothly while you focus on growing your user base.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section id="contact" class="py-20 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-6">Ready to Build Your Dream App?</h2>
-        <p class="text-xl text-gray-300 mb-8">
-          Let's discuss your app idea and create a solution that engages your customers and grows your business.
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="#contact" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
-            Book Consultation
-            <i class="fas fa-calendar ml-2"></i>
-          </a>
-          <a href="#contact" class="btn-secondary inline-block px-8 py-4 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all">
-            Request a Demo
-            <i class="fas fa-play ml-2"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="privacy-section">
+                <h2>Policy for Children</h2>
+                <p>We do not knowingly solicit information from or market to children under the age of 13. If you become aware of any data we have collected from children under age 13, please contact us using the contact information provided below.</p>
+            </div>
 
-  <!-- Footer -->
-  <footer class="pt-20 pb-10 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
-        <div class="lg:col-span-5 space-y-6">
-          <h2 class="text-3xl font-bold font-poppins mb-6">Get in <span class="gradient-text">Touch</span></h2>
-          <p class="text-gray-300 mb-8">
-            Have questions about our app development services? Contact us today to discuss your project.
-          </p>
-          <div class="space-y-4">
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                  <i class="fas fa-envelope text-primary"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Email</h3>
-                <p class="text-gray-300">info@tazikisolutions.com</p>
-              </div>
+            <div class="privacy-section">
+                <h2>Your Rights</h2>
+                <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+                <ul>
+                    <li>The right to access – You have the right to request copies of your personal data.</li>
+                    <li>The right to rectification – You have the right to request that we correct any information you believe is inaccurate.</li>
+                    <li>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</li>
+                    <li>The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
+                    <li>The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.</li>
+                    <li>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
+                </ul>
+                <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us using the information provided below.</p>
             </div>
-            
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                  <i class="fas fa-phone text-secondary"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Phone</h3>
-                <p class="text-gray-300">+254 714 294 223</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <i class="fas fa-map-marker-alt text-blue-500"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Location</h3>
-                <p class="text-gray-300">Nairobi, Kenya</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="lg:col-span-7">
-          <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
-            <h3 class="text-2xl font-bold mb-6">Start Your App Project</h3>
-            <form>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                  <input type="text" id="name" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                </div>
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                  <input type="email" id="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                </div>
-              </div>
-              
-              <div class="mb-6">
-                <label for="company" class="block text-sm font-medium text-gray-300 mb-2">Company</label>
-                <input type="text" id="company" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-              </div>
-              
-              <div class="mb-6">
-                <label for="platform" class="block text-sm font-medium text-gray-300 mb-2">Target Platform</label>
-                <select id="platform" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                  <option value="">Select platform</option>
-                  <option value="ios">iOS Only</option>
-                  <option value="android">Android Only</option>
-                  <option value="both">Both iOS & Android</option>
-                  <option value="web">Progressive Web App</option>
-                </select>
-              </div>
-              
-              <div class="mb-6">
-                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
-                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tell us about your app idea and requirements..."></textarea>
-              </div>
-              
-              <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
-                Start Project Discussion
-                <i class="fas fa-paper-plane ml-2"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-700/50 pt-10">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div class="md:col-span-3 space-y-4">
-            <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
-            <p class="text-gray-300 text-sm">
-              Empowering businesses through integrated technology solutions since 2020.
-            </p>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Services</h3>
-            <ul class="space-y-2">
-              <li><a href="network-cabling.html" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
-              <li><a href="app-development.html" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
-              <li><a href="website-development.html" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
-              <li><a href="cctv-installations.html" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Company</h3>
-            <ul class="space-y-2">
-              <li><a href="index.html#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
-              <li><a href="index.html#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
-              <li><a href="index.html#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
-              <li><a href="index.html#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Resources</h3>
-            <ul class="space-y-2">
-              <li><a href="index.html#blog" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-3 space-y-4">
-            <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
-            <p class="text-gray-300 text-sm">
-              Stay updated with our latest insights and news.
-            </p>
-            <div class="flex">
-              <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-              <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="text-center text-gray-500 text-sm mt-12">
-          <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
 
-  <!-- AI Chatbot -->
-  <div x-data="{ chatOpen: false }" class="fixed bottom-8 right-8 z-50">
-    <!-- Chat Button -->
-    <button 
-      @click="chatOpen = !chatOpen" 
-      class="bg-primary w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
-    >
-      <i x-show="!chatOpen" class="fas fa-comment-dots text-white text-2xl"></i>
-      <i x-show="chatOpen" class="fas fa-times text-white text-2xl"></i>
-    </button>
-    
-    <!-- Chat Window -->
-    <div 
-      x-show="chatOpen"
-      x-transition:enter="transition ease-out duration-300"
-      x-transition:enter-start="opacity-0 transform scale-90"
-      x-transition:enter-end="opacity-100 transform scale-100"
-      x-transition:leave="transition ease-in duration-300"
-      x-transition:leave-start="opacity-100 transform scale-100"
-      x-transition:leave-end="opacity-0 transform scale-90"
-      class="absolute bottom-20 right-0 w-80 md:w-96 bg-dark rounded-2xl shadow-2xl chatbox-shadow overflow-hidden"
-    >
-      <div class="bg-dark-light p-4 flex justify-between items-center border-b border-dark-lighter">
-        <div class="flex items-center">
-          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-3">
-            <i class="fas fa-robot text-primary"></i>
-          </div>
-          <div>
-            <h3 class="font-semibold text-white">Taziki AI Assistant</h3>
-            <div class="flex items-center">
-              <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-              <span class="text-xs text-gray-400">Online</span>
+            <div class="privacy-section">
+                <h2>Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
             </div>
-          </div>
+
+            <div class="privacy-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or concerns about this Privacy Policy, please contact us:</p>
+                <ul>
+                    <li>By email: privacy@tazikisolutions.com</li>
+                    <li>By phone: +1 (555) 123-4567</li>
+                    <li>By mail: 123 Tech Street, Innovation District, City, State 12345</li>
+                </ul>
+                <p><strong>Last Updated:</strong> January 1, 2023</p>
+            </div>
         </div>
-        <button @click="chatOpen = false" class="text-gray-500 hover:text-white">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="h-80 overflow-y-auto p-4 space-y-4" id="chatMessages">
-        <div class="flex items-start mb-4">
-          <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
-            <i class="fas fa-robot text-primary text-xs"></i>
-          </div>
-          <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3 max-w-[80%]">
-            <p class="text-white text-sm">Hi there! I'm Taziki's AI assistant. How can I help you with our app development services today?</p>
-          </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="website-development.html">Website Development</a></li>
+                        <li><a href="app-development.html">App Development</a></li>
+                        <li><a href="network-cabling.html">Network Cabling</a></li>
+                        <li><a href="cctv-installations.html">CCTV Installations</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="blog/index.html">Our Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>123 Tech Street, Innovation District</li>
+                        <li>City, State 12345</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Email: info@tazikisolutions.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Taziki Solutions. All rights reserved.</p>
+            </div>
         </div>
-      </div>
-      
-      <div class="p-4 bg-dark-lighter border-t border-gray-700/50">
-        <form id="chatForm" class="flex">
-          <input
-            type="text"
-            placeholder="Ask about app development..."
-            class="flex-1 px-4 py-2 bg-dark-light border border-gray-700 rounded-l-lg text-white focus:outline-none"
-            id="chatInput"
-          >
-          <button type="submit" class="bg-primary px-4 py-2 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-    
-    // Navbar background change on scroll
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('header');
-      if (window.scrollY > 100) {
-        navbar.classList.add('bg-dark/90');
-        navbar.classList.remove('bg-dark/80');
-      } else {
-        navbar.classList.remove('bg-dark/90');
-        navbar.classList.add('bg-dark/80');
-      }
-    });
-  </script>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
-
