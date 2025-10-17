@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Taziki Solutions - Content Manager</title>
 
-  <!-- 🟢 Netlify Identity Widget (must load first) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-  <!-- Style the admin page to match your theme -->
   <style>
     * {
       margin: 0;
@@ -53,29 +52,6 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
-    /* Netlify CMS Custom Styles */
-    .nc-githubAuthenticationPage-root,
-    .nc-notif__root,
-    .nc-entryEditor-container,
-    .nc-mediaLibrary-container,
-    .nc-collectionPage-container {
-      background: #0f172a !important;
-      color: white !important;
-    }
-
-    /* Hide the loading screen when CMS loads */
-    .nc-root {
-      display: none;
-    }
-
-    .nc-root.loaded {
-      display: block;
-    }
-
-    .loading.hidden {
-      display: none;
-    }
   </style>
 </head>
 
@@ -86,44 +62,25 @@
     <p class="loading-text">Loading Content Manager...</p>
   </div>
 
-  <!-- 🟠 Netlify Identity Redirect Fix -->
-  <script>
-    // Handle Netlify Identity redirect correctly
-    if (window.location.hash && window.location.hash.includes('invite_token')) {
-      const hash = window.location.hash;
-      window.location.href = window.location.origin + '/admin/' + hash;
-    }
-  </script>
-
-  <!-- 🟢 Netlify CMS (must load after the redirect script) -->
-  <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-
-  <!-- 🟣 Loading + Error handling -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Wait a bit for CMS to initialize
       setTimeout(function() {
         const loadingScreen = document.getElementById('loadingScreen');
-        const cmsRoot = document.querySelector('.nc-root');
-
+        const cmsRoot = document.querySelector('.nc-root') || document.querySelector('.CMS_ROOT');
+        
         if (cmsRoot) {
-          loadingScreen.classList.add('hidden');
-          cmsRoot.classList.add('loaded');
+          loadingScreen.style.display = 'none';
         } else {
           loadingScreen.innerHTML = `
-            <div style="text-align: center; color: #ef4444;">
-              <h2 style="margin-bottom: 16px;">Failed to load CMS</h2>
-              <p style="margin-bottom: 16px;">Please check:</p>
-              <ul style="text-align: left; margin-bottom: 16px;">
-                <li>• admin/config.yml exists</li>
-                <li>• Netlify Identity is enabled</li>
-                <li>• You're accessing via your deployed domain</li>
-              </ul>
+            <div style="text-align: center; color: #94a3b8;">
+              <h2 style="margin-bottom: 16px; color: #F97316;">CMS Loaded in Local Mode</h2>
+              <p style="margin-bottom: 16px;">You can now edit content locally.</p>
+              <p style="margin-bottom: 16px; font-size: 14px;">Note: Changes are saved to your local filesystem.</p>
               <a href="/" style="color: #F97316; text-decoration: underline;">Return to Site</a>
             </div>
           `;
         }
-      }, 3000);
+      }, 2000);
     });
   </script>
 </body>

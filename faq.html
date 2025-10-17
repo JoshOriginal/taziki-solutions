@@ -6,6 +6,14 @@
   <title>Frequently Asked Questions | Taziki Solutions</title>
   <meta name="description" content="Get answers to common questions about our services, pricing, and process at Taziki Solutions.">
   
+  <!-- Favicons for all devices -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#F97316">
+
   <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +31,7 @@
   <!-- External resources -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
   <!-- Fallback for no JavaScript -->
@@ -249,29 +258,6 @@
       transform: rotate(180deg);
     }
   </style>
-</head>
-<body class="min-h-screen font-sans">
-  <!-- NAVIGATION GOES HERE -->
-    <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">Taziki <span>Solutions</span></a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="website-development.html">Web Development</a></li>
-                    <li><a href="app-development.html">App Development</a></li>
-                    <li><a href="network-cabling.html">Network Cabling</a></li>
-                    <li><a href="cctv-installations.html">CCTV Installations</a></li>
-                    <li><a href="case-studies.html">Case Studies</a></li>
-                    <li><a href="blog/index.html">Blog</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <!-- END NAVIGATION -->
-     
   <!-- Header/Navigation -->
   <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -286,13 +272,14 @@
         <!-- Desktop Navigation -->
         <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
           <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
-          <a href="index.html#about" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">About</a>
-          <a href="index.html#services" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Services</a>
+          <a href="website-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Web Development</a>
+          <a href="app-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">App Development</a>
+          <a href="network-cabling.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Network Cabling</a>
+          <a href="cctv-installations.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">CCTV Installations</a>
           <a href="case-studies.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Case Studies</a>
+          <a href="blog/index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
           <a href="faq.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">FAQ</a>
-          <a href="index.html#why-us" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Why Choose Us</a>
-          <a href="index.html#blog" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
-          <a href="index.html#contact" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Contact</a>
+          <a href="privacy-policy.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Privacy Policy</a>
         </nav>
         
         <!-- Mobile menu button -->
@@ -311,13 +298,14 @@
     <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
-        <a href="index.html#about" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">About</a>
-        <a href="index.html#services" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Services</a>
+        <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
+        <a href="app-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">App Development</a>
+        <a href="network-cabling.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Network Cabling</a>
+        <a href="cctv-installations.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">CCTV Installations</a>
         <a href="case-studies.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Case Studies</a>
+        <a href="blog/index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
         <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
-        <a href="index.html#why-us" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Why Choose Us</a>
-        <a href="index.html#blog" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
-        <a href="index.html#contact" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Contact</a>
+        <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
       </div>
     </div>
   </header>
@@ -823,6 +811,11 @@
   </div>
   
   <script>
+    // Initialize Alpine.js with collapse plugin
+    document.addEventListener('alpine:init', () => {
+      // Collapse plugin is now available
+    });
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -849,6 +842,87 @@
         navbar.classList.add('bg-dark/80');
       }
     });
+
+    // Chatbot functionality
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    if (chatForm) {
+      chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        if (message === '') return;
+        
+        // Add user message
+        addMessage('user', message);
+        chatInput.value = '';
+        
+        // Simulate AI response
+        setTimeout(() => {
+          let response = getBotResponse(message);
+          addMessage('bot', response);
+          
+          // Scroll to bottom
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+      });
+    }
+    
+    function addMessage(type, message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'flex items-start mb-4';
+      
+      if (type === 'bot') {
+        messageDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
+            <i class="fas fa-robot text-primary text-xs"></i>
+          </div>
+          <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">${message}</p>
+          </div>
+        `;
+      } else {
+        messageDiv.innerHTML = `
+          <div class="ml-auto bg-secondary/20 rounded-lg rounded-tr-none p-3 max-w-[80%]">
+            <p class="text-white text-sm">${message}</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center ml-2 flex-shrink-0">
+            <i class="fas fa-user text-secondary text-xs"></i>
+          </div>
+        `;
+      }
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function getBotResponse(message) {
+      message = message.toLowerCase();
+      
+      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return "Hello! I see you're browsing our FAQ. 😊 How can I help you today?";
+      } 
+      else if (message.includes('service') || message.includes('what do you offer')) {
+        return "We offer Network Cabling & Smart Building Integration, App Development, Website Development, and CCTV Installations. Which service are you interested in?";
+      }
+      else if (message.includes('price') || message.includes('cost') || message.includes('how much')) {
+        return "Our pricing varies based on project requirements. I'd recommend checking our FAQ section for general pricing information, or we can arrange a consultation for a custom quote!";
+      }
+      else if (message.includes('time') || message.includes('how long') || message.includes('duration')) {
+        return "Project timelines depend on complexity: Basic websites (2-3 weeks), Mobile apps (4-8 weeks), Network installations (1-2 weeks). Check our FAQ for detailed timelines!";
+      }
+      else if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+        return "You can reach us at info@tazikisolutions.com or call +254 714 294 223. We're here to help!";
+      }
+      else if (message.includes('support') || message.includes('maintenance')) {
+        return "Yes! We provide ongoing support, maintenance, training, and warranty coverage. We offer flexible support packages tailored to your needs.";
+      }
+      else {
+        return "I'm here to help with questions about our services, pricing, timelines, or technical details. Feel free to ask anything specific!";
+      }
+    }
   </script>
 </body>
 </html>
