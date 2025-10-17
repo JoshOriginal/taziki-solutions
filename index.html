@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Taziki Solutions | Where Innovation Meets Opportunity</title>
+
+ <!-- Favicons for all devices -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#F97316">
   
   <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1155,7 +1163,7 @@
   }
 </script>
 
-  <script id="app-script">
+ <script id="app-script">
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -1183,10 +1191,18 @@
       }
     });
     
-    // Chatbot functionality
+    // Enhanced Chatbot functionality
     const chatForm = document.getElementById('chatForm');
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
+    
+    // Conversation memory
+    let conversationContext = {
+      lastService: null,
+      userName: null,
+      userInterest: null,
+      conversationCount: 0
+    };
     
     if (chatForm) {
       chatForm.addEventListener('submit', function(e) {
@@ -1199,14 +1215,18 @@
         addMessage('user', message);
         chatInput.value = '';
         
-        // Simulate AI response
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Simulate AI thinking time (random between 800-1500ms for more natural feel)
         setTimeout(() => {
-          let response = getBotResponse(message);
+          removeTypingIndicator();
+          let response = getEnhancedBotResponse(message);
           addMessage('bot', response);
           
           // Scroll to bottom
           chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
+        }, 800 + Math.random() * 700);
       });
     }
     
@@ -1238,47 +1258,285 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    function getBotResponse(message) {
-      message = message.toLowerCase();
-      
-      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-        return "Hello! How can I help you today?";
-      } 
-      else if (message.includes('about') || message.includes('company')) {
-        return "Taziki Solutions is a forward-thinking digital technology company specializing in integrated IT services for modern businesses. We deliver cutting-edge solutions in network infrastructure, app development, web design, and security systems.";
-      } 
-      else if (message.includes('service')) {
-        return "We offer several services including Network Cabling & Smart Building Integration, App Development, Website Development, and CCTV Installations. Which would you like to know more about?";
-      }
-      else if (message.includes('network') || message.includes('cabling')) {
-        return "Our Network Cabling & Smart Building Integration services provide future-proof infrastructure solutions that connect your entire organization with reliable, high-performance networks.";
-      }
-      else if (message.includes('app') || message.includes('mobile')) {
-        return "Our App Development team creates custom mobile applications that enhance customer engagement and streamline business operations for both iOS and Android platforms.";
-      }
-      else if (message.includes('web') || message.includes('website')) {
-        return "Our Website Development services deliver stunning, responsive websites that showcase your brand and convert visitors into customers with modern design principles.";
-      }
-      else if (message.includes('cctv') || message.includes('camera') || message.includes('security')) {
-        return "Our CCTV Installation services provide advanced surveillance systems that protect your assets and provide peace of mind with HD camera systems and remote monitoring capabilities.";
-      }
-      else if (message.includes('price') || message.includes('cost') || message.includes('pricing')) {
-        return "Our pricing varies based on project requirements and scope. I'd be happy to arrange a consultation with our team to provide you with a customized quote. Would you like us to contact you?";
-      }
-      else if (message.includes('location') || message.includes('where')) {
-        return "We're based in Nairobi, Kenya, but we serve clients throughout East Africa.";
-      }
-      else if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
-        return "You can contact us via email at info@tazikisolutions.co.ke or by phone at +254 700 000000. Would you like me to help you schedule a consultation?";
-      }
-      else if (message.includes('blog') || message.includes('article')) {
-        return "Our latest blog posts include 'The Future of Smart Buildings', '5 Web Development Trends That Will Dominate 2025', and 'From Concept to Launch: A Guide to Successful App Development'. Would you like to read any of these?";
-      }
-      else {
-       return "I'm here to help! Ask me about Taziki Solutions' services, company information, pricing, or anything else you'd like to know!";
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'typing-indicator';
+      typingDiv.className = 'flex items-start mb-4';
+      typingDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
+          <i class="fas fa-robot text-primary text-xs"></i>
+        </div>
+        <div class="bg-dark-lighter rounded-lg rounded-tl-none p-3">
+          <div class="flex space-x-1">
+            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          </div>
+        </div>
+      `;
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function removeTypingIndicator() {
+      const typingIndicator = document.getElementById('typing-indicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
       }
     }
+    
+    function getEnhancedBotResponse(message) {
+      message = message.toLowerCase();
+      conversationContext.conversationCount++;
+      
+      // Greetings and basic interactions
+      if (message.includes('hello') || message.includes('hi') || message.includes('hey') || message.includes('good morning') || message.includes('good afternoon') || message.includes('good evening')) {
+        const greetings = [
+          "Hello there! 👋 I'm Leo, your Taziki Solutions assistant. It's wonderful to connect with you today!",
+          "Hi! I'm Leo from Taziki Solutions. 😊 How can I make your day better?",
+          "Hello! Thanks for stopping by. I'm Leo, here to help you discover how Taziki Solutions can transform your business.",
+          "Hey there! 👋 I'm Leo, your friendly guide to all things Taziki Solutions. What brings you here today?"
+        ];
+        return greetings[Math.floor(Math.random() * greetings.length)];
+      }
+      
+      // Name recognition
+      if ((message.includes('your name') || message.includes('who are you')) && !message.includes('my name')) {
+        return "I'm Leo, your dedicated AI assistant at Taziki Solutions! 🤖 I'm here to help you learn about our services, answer questions, and connect you with the right solutions for your business.";
+      }
+      
+      // User name capture
+      if (message.includes('my name is') || message.includes("i'm") || message.includes('call me')) {
+        const nameMatch = message.match(/(?:my name is|i'm|call me)\s+([a-zA-Z]+)/);
+        if (nameMatch && nameMatch[1]) {
+          conversationContext.userName = nameMatch[1];
+          return `Nice to meet you, ${conversationContext.userName}! 🌟 I'm Leo from Taziki Solutions. How can I assist you today?`;
+        }
+      }
+      
+      // Company information
+      if (message.includes('about') || message.includes('company') || message.includes('taziki') || message.includes('what do you do')) {
+        return `At Taziki Solutions, we're passionate about transforming businesses through technology! 🚀
 
+We're a forward-thinking digital technology company based in Nairobi, Kenya, specializing in integrated IT services. Our mission is to deliver cutting-edge solutions that help businesses operate efficiently and grow sustainably.
+
+We focus on four key areas:
+• Network Infrastructure & Smart Buildings
+• Mobile App Development
+• Website Development
+• Security Systems (CCTV)
+
+What specifically would you like to know more about?`;
+      }
+      
+      // Services inquiry
+      if (message.includes('service') || message.includes('what do you offer') || message.includes('what can you do') || message.includes('offer')) {
+        return `We offer comprehensive technology solutions designed to elevate your business! Here are our main services:
+
+🔌 **Network Cabling & Smart Building Integration**
+   - Future-proof infrastructure
+   - Smart automation systems
+   - High-performance networks
+
+📱 **App Development**
+   - iOS & Android apps
+   - Cross-platform solutions
+   - Custom mobile experiences
+
+🌐 **Website Development**
+   - Responsive web design
+   - E-commerce solutions
+   - SEO optimization
+
+📹 **CCTV Installations**
+   - HD surveillance systems
+   - Remote monitoring
+   - Smart security integration
+
+Which service interests you the most? I'd love to share more details!`;
+      }
+      
+      // Network Cabling specific
+      if (message.includes('network') || message.includes('cabling') || message.includes('infrastructure') || message.includes('wiring') || message.includes('ethernet')) {
+        conversationContext.lastService = 'network';
+        return `Excellent choice! Our Network Cabling services are all about building reliable, high-performance infrastructure. 🏗️
+
+We provide:
+• Structured cabling systems for offices and buildings
+• Smart building automation (lighting, climate control, security)
+• Network optimization for maximum speed and reliability
+• Future-proof designs that grow with your business
+
+Our packages start from KES 25,000 for small offices. Would you like me to share more about our pricing or schedule a free site assessment?`;
+      }
+      
+      // App Development specific
+      if (message.includes('app') || message.includes('mobile') || message.includes('ios') || message.includes('android') || message.includes('application')) {
+        conversationContext.lastService = 'app';
+        return `Mobile apps are my favorite topic! 📱 We create stunning, functional apps that users love.
+
+Our app development includes:
+• Native iOS and Android development
+• Cross-platform solutions (React Native/Flutter)
+• User experience design and prototyping
+• Backend integration and APIs
+• App store deployment and maintenance
+
+Packages start from KES 45,000. Are you thinking of a specific type of app, or would you like to see some of our work?`;
+      }
+      
+      // Website Development specific
+      if (message.includes('website') || message.includes('web') || message.includes('site') || message.includes('e-commerce') || message.includes('online store')) {
+        conversationContext.lastService = 'website';
+        return `Your digital presence matters! 🌐 We build websites that not only look amazing but also drive results.
+
+We specialize in:
+• Responsive web design (perfect on all devices)
+• E-commerce platforms with payment integration
+• Corporate websites with CMS
+• SEO optimization and performance tuning
+• Secure hosting solutions
+
+Starting from KES 25,000 for basic websites. Do you have a specific project in mind, or would you like to discuss your goals?`;
+      }
+      
+      // CCTV specific
+      if (message.includes('cctv') || message.includes('camera') || message.includes('security') || message.includes('surveillance') || message.includes('monitor')) {
+        conversationContext.lastService = 'cctv';
+        return `Security is peace of mind! 🔒 Our CCTV solutions keep your property safe 24/7.
+
+We offer:
+• HD camera systems (1080p and 4K)
+• Remote monitoring via mobile apps
+• Cloud storage options
+• Smart motion detection alerts
+• Professional installation and maintenance
+
+Packages start from KES 30,000 for home systems. Would you like a free security assessment for your property?`;
+      }
+      
+      // Pricing inquiries
+      if (message.includes('price') || message.includes('cost') || message.includes('how much') || message.includes('pricing') || message.includes('quote')) {
+        if (conversationContext.lastService) {
+          const pricing = {
+            'network': "Our Network Cabling packages:\n• Basic (small office): KES 25,000\n• Standard (mid-size): KES 55,000\n• Enterprise (large): from KES 120,000\n\nWe offer free site assessments!",
+            'app': "App Development pricing:\n• Starter App: KES 45,000\n• Business App: KES 95,000\n• Enterprise App: from KES 180,000\n\nWe provide free UI design with website bundles!",
+            'website': "Website Development packages:\n• Basic Website: KES 25,000\n• E-commerce: KES 55,000\n• Corporate: from KES 90,000\n\nFree hosting for the first month included!",
+            'cctv': "CCTV Installation packages:\n• Home Package: KES 30,000\n• Office Package: KES 65,000\n• Enterprise: from KES 120,000\n\nFree site visits for installations over KES 50,000!"
+          };
+          return pricing[conversationContext.lastService] || "I'd be happy to provide you with a customized quote based on your specific needs. Could you tell me a bit more about your project requirements?";
+        }
+        return "Our pricing varies based on project scope and requirements. For example:\n\n• Basic websites start from KES 25,000\n• Mobile apps from KES 45,000\n• Network cabling from KES 25,000\n• CCTV systems from KES 30,000\n\nWhich service are you interested in? I can provide more detailed pricing!";
+      }
+      
+      // Contact information
+      if (message.includes('contact') || message.includes('email') || message.includes('phone') || message.includes('number') || message.includes('address') || message.includes('location') || message.includes('where')) {
+        return `Here's how you can reach us: 📞
+
+📧 Email: info@tazikisolutions.com
+📞 Phone: +254 714 294 223
+📍 Location: Nairobi, Kenya
+
+We'd love to hear from you! You can also fill out the contact form on our website, and we'll get back to you within 24 hours.
+
+Would you like me to help you schedule a consultation?`;
+      }
+      
+      // Hours/availability
+      if (message.includes('hour') || message.includes('open') || message.includes('available') || message.includes('time') || message.includes('when')) {
+        return "Our team is available:\n\n🕘 Monday - Friday: 8:00 AM - 6:00 PM\n🕘 Saturday: 9:00 AM - 2:00 PM\n🌙 Sunday: Closed\n\nWe respond to emails and messages within 24 hours. Need to schedule a specific time? I can help with that!";
+      }
+      
+      // Process/workflow
+      if (message.includes('process') || message.includes('how does it work') || message.includes('workflow') || message.includes('steps') || message.includes('procedure')) {
+        return `Great question! Here's our typical process: 🔄
+
+1. **Discovery Call** - We understand your needs and goals
+2. **Proposal & Planning** - Custom solution and timeline
+3. **Design & Development** - We bring your vision to life
+4. **Testing & Review** - Ensure everything works perfectly
+5. **Launch & Support** - Go live with ongoing maintenance
+
+We keep you involved at every step and provide regular updates. Ready to start your project?`;
+      }
+      
+      // Timeline/duration
+      if (message.includes('how long') || message.includes('timeline') || message.includes('duration') || message.includes('time') || message.includes('when ready')) {
+        return "Project timelines vary based on complexity:\n\n• Basic websites: 2-3 weeks\n• Mobile apps: 4-8 weeks\n• Network installations: 1-2 weeks\n• CCTV systems: 3-5 days\n\nThese are estimates - we'll provide a detailed timeline after understanding your specific requirements. Need something urgently? We can discuss accelerated options!";
+      }
+      
+      // Portfolio/work examples
+      if (message.includes('portfolio') || message.includes('work') || message.includes('examples') || message.includes('projects') || message.includes('show me')) {
+        return "I'd love to show you our work! While I can't display images here, we have an extensive portfolio of:\n\n• E-commerce websites for retail businesses\n• Mobile apps for service industries\n• Network infrastructure for corporate offices\n• Security systems for residential and commercial properties\n\nYou can view some case studies on our website, or I can arrange for our team to share specific examples that match your industry!";
+      }
+      
+      // Technical questions
+      if (message.includes('technology') || message.includes('tech') || message.includes('programming') || message.includes('framework') || message.includes('platform')) {
+        return "We work with modern, reliable technologies: 💻\n\n• **Web Development**: React, Vue.js, Node.js, WordPress\n• **Mobile Apps**: Swift, Kotlin, React Native, Flutter\n• **Backend**: Python, PHP, .NET, MongoDB, MySQL\n• **Infrastructure**: Cisco, Ubiquiti, enterprise-grade hardware\n\nWe choose the right technology stack based on your project needs and long-term goals. Have specific technical requirements?";
+      }
+      
+      // Support/maintenance
+      if (message.includes('support') || message.includes('maintenance') || message.includes('help') || message.includes('after') || message.includes('update')) {
+        return "We provide comprehensive support! 🔧\n\n• **Ongoing Maintenance** - Regular updates and monitoring\n• **Technical Support** - Responsive help desk\n• **Training** - We teach you how to manage your systems\n• **Warranty** - Coverage on all our installations\n• **Emergency Support** - Quick response for critical issues\n\nWe believe our relationship continues long after project completion!";
+      }
+      
+      // Payment options
+      if (message.includes('payment') || message.includes('pay') || message.includes('installment') || message.includes('finance') || message.includes('money')) {
+        return "We offer flexible payment options: 💳\n\n• 50% upfront, 50% on completion (standard)\n• Milestone-based payments for larger projects\n• Payment plans available for qualifying clients\n• We accept bank transfers, mobile money, and credit cards\n\nLet's discuss what works best for your budget!";
+      }
+      
+      // Urgent requests
+      if (message.includes('urgent') || message.includes('emergency') || message.includes('asap') || message.includes('quick') || message.includes('fast')) {
+        return "I understand you need quick assistance! 🚨\n\nFor urgent matters, I recommend:\n1. Calling us directly at +254 714 294 223\n2. Sending an email to info@tazikisolutions.com with 'URGENT' in the subject\n3. Using our contact form with priority request\n\nI can also help escalate your inquiry right now. What's the nature of your urgent need?";
+      }
+      
+      // Thank you responses
+      if (message.includes('thank') || message.includes('thanks') || message.includes('appreciate')) {
+        const thanks = [
+          "You're very welcome! 😊 Happy to help.",
+          "My pleasure! Let me know if you need anything else.",
+          "You're most welcome! Is there anything specific you'd like to explore further?",
+          "Anytime! I'm here whenever you need assistance."
+        ];
+        return thanks[Math.floor(Math.random() * thanks.length)];
+      }
+      
+      // Goodbye/farewell
+      if (message.includes('bye') || message.includes('goodbye') || message.includes('see you') || message.includes('farewell') || message.includes('exit')) {
+        const farewells = [
+          `Goodbye${conversationContext.userName ? ', ' + conversationContext.userName : ''}! Thanks for chatting with me. Come back anytime! 👋`,
+          "It was great helping you! Feel free to reach out if you have more questions. Have a wonderful day! 🌟",
+          "Thanks for stopping by! Remember, I'm always here when you need assistance with Taziki Solutions. Take care! 😊",
+          "Farewell! Don't hesitate to return if you need more information. We're here to help your business grow! 🚀"
+        ];
+        return farewells[Math.floor(Math.random() * farewells.length)];
+      }
+      
+      // Follow-up based on context
+      if (conversationContext.lastService && conversationContext.conversationCount > 2) {
+        const followUps = {
+          'network': "Were you interested in learning more about our network cabling packages, or would you like me to arrange a free site assessment?",
+          'app': "Would you like to discuss your app idea in more detail, or should I connect you with our development team?",
+          'website': "Shall we explore website options for your business, or would you prefer a consultation call?",
+          'cctv': "Would you like a free security assessment, or should I provide more details about our CCTV packages?"
+        };
+        
+        if (followUps[conversationContext.lastService] && Math.random() > 0.7) {
+          return followUps[conversationContext.lastService];
+        }
+      }
+      
+      // Default response for unrecognized queries
+      const defaultResponses = [
+        "I'm here to help you discover how Taziki Solutions can transform your business! Could you tell me a bit more about what you're looking for?",
+        "That's an interesting question! I specialize in helping with our services: network cabling, app development, website creation, and CCTV systems. What would you like to know more about?",
+        "I'd love to assist you! Are you interested in our technology services, or do you have a specific project in mind?",
+        "Thanks for your message! I'm here to help with information about Taziki Solutions' services and how we can support your business goals. What would you like to explore?"
+      ];
+      
+      return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
   </script>
+
 
 
