@@ -1,6 +1,10 @@
 backend:
   name: git-gateway
   branch: main
+  # For local testing, comment out the above and use:
+  # name: test-repo
+
+local_backend: true  # This enables local editing
 
 media_folder: "images"
 public_folder: "/images"
