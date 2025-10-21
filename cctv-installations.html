@@ -13,27 +13,28 @@
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#F97316">
-  
+
   <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  
+
   <!-- Preload critical font -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
-  
+
   <!-- Load fonts with optimization -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  
+
   <!-- External resources -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
+
   <!-- Fallback for no JavaScript -->
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
   </noscript>
+
   <script>
     tailwind.config = {
       theme: {
@@ -53,100 +54,117 @@
       }
     }
   </script>
+
   <style id="app-style">
-    /* Fixed scrolling issue */
-    html {
+    /* Scroll fixes with high specificity */
+    html, body {
       scroll-behavior: smooth;
-      overflow-x: hidden;
+      overflow: auto !important;
+      overflow-y: scroll !important;
+      overflow-x: hidden !important;
+      height: auto !important;
+      min-height: 100vh !important;
+      max-height: none !important;
+      position: relative !important;
     }
-    
+
+    body > * {
+      overflow: visible !important;
+    }
+
+    html.overflow-hidden, body.overflow-hidden, .overflow-hidden {
+      overflow: auto !important;
+      overflow-y: scroll !important;
+    }
+
+    section {
+      overflow: visible !important;
+      height: auto !important;
+    }
+
     body {
       background-color: #0f172a;
       color: #fff;
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      overflow-y: auto;
-      min-height: 100vh;
-      position: relative;
     }
-    
+
     .gradient-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     }
-    
+
     .gradient-text {
       background: linear-gradient(90deg, #F97316, #16A34A);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-    
+
     .hero-gradient {
       background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 70%),
                 radial-gradient(circle at bottom left, rgba(22, 163, 74, 0.15), transparent 70%);
     }
-    
+
     .btn-primary {
       background: linear-gradient(90deg, #F97316, #F97316);
       transition: all 0.3s ease;
     }
-    
+
     .btn-primary:hover {
       background: linear-gradient(90deg, #ea580c, #F97316);
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
     }
-    
+
     .btn-secondary {
       background: linear-gradient(90deg, #16A34A, #16A34A);
       transition: all 0.3s ease;
     }
-    
+
     .btn-secondary:hover {
       background: linear-gradient(90deg, #15803d, #16A34A);
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
     }
-    
+
     .service-card {
       transition: all 0.3s ease;
     }
-    
+
     .service-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
-    
+
     .service-card:hover .service-icon {
       transform: scale(1.1);
     }
-    
+
     .service-icon {
       transition: all 0.3s ease;
     }
-    
+
     .why-us-card {
       transition: all 0.3s ease;
     }
-    
+
     .why-us-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
-    
+
     .blog-card {
       transition: all 0.3s ease;
     }
-    
+
     .blog-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
-    
+
     .animate-float {
       animation: float 6s ease-in-out infinite;
     }
-    
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
@@ -156,7 +174,7 @@
     .animate-pulse-slow {
       animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    
+
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.7; }
@@ -165,22 +183,22 @@
     .chatbox-shadow {
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
-    
+
     /* Navbar styles */
     .navbar-fixed {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-    
+
     .navbar-link {
       position: relative;
       transition: all 0.3s ease;
     }
-    
+
     .navbar-link:hover {
       color: #F97316;
     }
-    
+
     .navbar-link::after {
       content: '';
       position: absolute;
@@ -191,62 +209,38 @@
       background: linear-gradient(90deg, #F97316, #16A34A);
       transition: width 0.3s ease;
     }
-    
+
     .navbar-link:hover::after {
       width: 100%;
     }
-    
+
     /* Mobile menu animation */
     .mobile-menu {
       transition: transform 0.3s ease, opacity 0.3s ease;
       transform-origin: top;
     }
-    
+
     .mobile-menu.hidden {
       transform: scaleY(0);
       opacity: 0;
     }
-    
+
     /* Pricing Card Styles */
     .pricing-card {
       transition: all 0.3s ease;
     }
-    
+
     .pricing-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
-    
+
     .pricing-card.popular {
       border: 2px solid #8B5CF6;
     }
-    
-    /* Ensure all sections allow content to flow naturally */
-    section {
-      position: relative;
-      overflow: visible;
-    }
-        /* NUCLEAR FIX - Force scrolling */
-    html, body {
-      overflow: auto !important;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-      height: auto !important;
-      max-height: none !important;
-    }
-
-    body > * {
-      overflow: visible !important;
-    }
-
-    /* Override any potential Tailwind classes */
-    .overflow-hidden {
-      overflow: auto !important;
-    }
   </style>
-
 </head>
-<body class="min-h-screen font-sans" style="overflow-y: auto !important; height: auto !important;">
+<body class="min-h-screen font-sans">
   <!-- Header/Navigation -->
   <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -257,20 +251,20 @@
             <span class="text-primary">Taziki</span><span class="text-white">Solutions</span>
           </a>
         </div>
-        
-  <!-- Desktop Navigation -->
-  <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
-      <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
-      <a href="website-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Web Development</a>
-      <a href="app-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">App Development</a>
-      <a href="network-cabling.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Network Cabling</a>
-      <a href="cctv-installations.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">CCTV Installations</a>
-      <a href="case-studies.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Case Studies</a>
-      <a href="blog/index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
-      <a href="faq.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">FAQ</a>
-      <a href="privacy-policy.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Privacy Policy</a>
-  </nav>
-        
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
+          <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
+          <a href="website-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Web Development</a>
+          <a href="app-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">App Development</a>
+          <a href="network-cabling.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Network Cabling</a>
+          <a href="cctv-installations.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">CCTV Installations</a>
+          <a href="case-studies.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Case Studies</a>
+          <a href="blog/index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
+          <a href="faq.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">FAQ</a>
+          <a href="privacy-policy.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Privacy Policy</a>
+        </nav>
+
         <!-- Mobile menu button -->
         <div class="-mr-2 flex items-center md:hidden">
           <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-dark-lighter focus:outline-none">
@@ -282,23 +276,24 @@
         </div>
       </div>
     </div>
-    
-  <!-- Mobile menu -->
-  <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
-          <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
-          <a href="app-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">App Development</a>
-          <a href="network-cabling.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Network Cabling</a>
-          <a href="cctv-installations.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">CCTV Installations</a>
-          <a href="case-studies.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Case Studies</a>
-          <a href="blog/index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
-          <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
-          <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
-      </div>
-  </div>
 
-  <!-- Hero Section (Breadcrumb Removed) -->
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30" @click.outside="open = false">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
+        <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
+        <a href="app-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">App Development</a>
+        <a href="network-cabling.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Network Cabling</a>
+        <a href="cctv-installations.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">CCTV Installations</a>
+        <a href="case-studies.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Case Studies</a>
+        <a href="blog/index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Blog</a>
+        <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
+        <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
   <section class="hero-gradient pt-24 pb-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -398,14 +393,14 @@
   </section>
 
   <!-- CCTV Features -->
-  <section class="py-20 relative overflow-hidden">
+  <section class="py-20 relative">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Advanced <span class="gradient-text">Features</span></h2>
         <p class="text-gray-300 max-w-2xl mx-auto">Comprehensive security features for complete peace of mind</p>
         <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
@@ -414,7 +409,7 @@
           <h3 class="text-xl font-bold mb-2">24/7 Recording</h3>
           <p class="text-gray-300">Continuous recording with motion-activated alerts to capture every important moment.</p>
         </div>
-        
+
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-wifi text-secondary text-2xl"></i>
@@ -422,7 +417,7 @@
           <h3 class="text-xl font-bold mb-2">Wireless Options</h3>
           <p class="text-gray-300">Flexible installation with wireless camera options for hard-to-reach areas.</p>
         </div>
-        
+
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-moon text-blue-500 text-2xl"></i>
@@ -430,7 +425,7 @@
           <h3 class="text-xl font-bold mb-2">Night Vision</h3>
           <p class="text-gray-300">Infrared night vision capabilities for clear monitoring even in complete darkness.</p>
         </div>
-        
+
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-wind text-purple-500 text-2xl"></i>
@@ -438,7 +433,7 @@
           <h3 class="text-xl font-bold mb-2">Weather Resistant</h3>
           <p class="text-gray-300">Outdoor cameras built to withstand harsh weather conditions and extreme temperatures.</p>
         </div>
-        
+
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-database text-green-500 text-2xl"></i>
@@ -446,7 +441,7 @@
           <h3 class="text-xl font-bold mb-2">Multiple Storage</h3>
           <p class="text-gray-300">Flexible storage options including local DVR, cloud storage, and network storage.</p>
         </div>
-        
+
         <div class="text-center p-6">
           <div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-user-shield text-amber-500 text-2xl"></i>
@@ -466,7 +461,7 @@
         <p class="text-gray-300 max-w-2xl mx-auto">Choose the perfect security solution for your property</p>
         <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Home Package -->
         <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
@@ -505,9 +500,9 @@
             Get Started
           </a>
         </div>
-        
+
         <!-- Office Package -->
-        <div class="pricing-card pricing-card popular bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border-2 border-purple-500 shadow-lg relative">
+        <div class="pricing-card popular bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border-2 border-purple-500 shadow-lg relative">
           <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span class="bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
           </div>
@@ -546,7 +541,7 @@
             Get Started
           </a>
         </div>
-        
+
         <!-- Enterprise Package -->
         <div class="pricing-card bg-dark-light/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
           <div class="text-center mb-6">
@@ -589,13 +584,13 @@
   </section>
 
   <!-- Offers & Discounts -->
-  <section class="py-20 relative overflow-hidden">
+  <section class="py-20 relative">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4">Special <span class="gradient-text">Offers</span></h2>
         <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
       </div>
-      
+
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
@@ -609,7 +604,7 @@
               Get a free professional site assessment for installations over KES 50,000. Our experts will evaluate your property and recommend the optimal camera placement for maximum security coverage.
             </p>
           </div>
-          
+
           <div class="bg-dark-light/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/30 shadow-lg">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
@@ -669,7 +664,7 @@
                 <p class="text-gray-300">info@tazikisolutions.com</p>
               </div>
             </div>
-            
+
             <div class="flex items-start">
               <div class="mr-4 mt-1">
                 <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
@@ -681,7 +676,7 @@
                 <p class="text-gray-300">+254 714 294 223</p>
               </div>
             </div>
-            
+
             <div class="flex items-start">
               <div class="mr-4 mt-1">
                 <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
@@ -695,7 +690,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="lg:col-span-7">
           <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
             <h3 class="text-2xl font-bold mb-6">Get Your Security Assessment</h3>
@@ -710,7 +705,7 @@
                   <input type="email" id="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
               </div>
-              
+
               <div class="mb-6">
                 <label for="property-type" class="block text-sm font-medium text-gray-300 mb-2">Property Type</label>
                 <select id="property-type" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
@@ -722,7 +717,7 @@
                   <option value="industrial">Industrial Facility</option>
                 </select>
               </div>
-              
+
               <div class="mb-6">
                 <label for="property-size" class="block text-sm font-medium text-gray-300 mb-2">Property Size</label>
                 <select id="property-size" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
@@ -733,12 +728,12 @@
                   <option value="commercial">Commercial Building</option>
                 </select>
               </div>
-              
+
               <div class="mb-6">
                 <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Security Requirements</label>
                 <textarea id="message" rows="4" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tell us about your security concerns and requirements..."></textarea>
               </div>
-              
+
               <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
                 Request Security Assessment
                 <i class="fas fa-shield-alt ml-2"></i>
@@ -747,7 +742,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="border-t border-gray-700/50 pt-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div class="md:col-span-3 space-y-4">
@@ -756,7 +751,7 @@
               Empowering businesses through integrated technology solutions since 2020.
             </p>
           </div>
-          
+
           <div class="md:col-span-2 space-y-4">
             <h3 class="font-semibold mb-4">Services</h3>
             <ul class="space-y-2">
@@ -766,7 +761,7 @@
               <li><a href="cctv-installations.html" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
             </ul>
           </div>
-          
+
           <div class="md:col-span-2 space-y-4">
             <h3 class="font-semibold mb-4">Company</h3>
             <ul class="space-y-2">
@@ -776,7 +771,7 @@
               <li><a href="index.html#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
             </ul>
           </div>
-          
+
           <div class="md:col-span-2 space-y-4">
             <h3 class="font-semibold mb-4">Resources</h3>
             <ul class="space-y-2">
@@ -786,7 +781,7 @@
               <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
             </ul>
           </div>
-          
+
           <div class="md:col-span-3 space-y-4">
             <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
             <p class="text-gray-300 text-sm">
@@ -800,7 +795,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="text-center text-gray-500 text-sm mt-12">
           <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
         </div>
@@ -818,7 +813,7 @@
       <i x-show="!chatOpen" class="fas fa-comment-dots text-white text-2xl"></i>
       <i x-show="chatOpen" class="fas fa-times text-white text-2xl"></i>
     </button>
-    
+
     <!-- Chat Window -->
     <div 
       x-show="chatOpen"
@@ -829,6 +824,7 @@
       x-transition:leave-start="opacity-100 transform scale-100"
       x-transition:leave-end="opacity-0 transform scale-90"
       class="absolute bottom-20 right-0 w-80 md:w-96 bg-dark rounded-2xl shadow-2xl chatbox-shadow overflow-hidden"
+      @click.outside="chatOpen = false"
     >
       <div class="bg-dark-light p-4 flex justify-between items-center border-b border-dark-lighter">
         <div class="flex items-center">
@@ -847,7 +843,7 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
+
       <div class="h-80 overflow-y-auto p-4 space-y-4" id="chatMessages">
         <div class="flex items-start mb-4">
           <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-2 flex-shrink-0">
@@ -858,7 +854,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="p-4 bg-dark-lighter border-t border-gray-700/50">
         <form id="chatForm" class="flex">
           <input
@@ -874,54 +870,71 @@
       </div>
     </div>
   </div>
-  
-<script>
-  // Debug scrolling issues
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded - checking scroll restrictions:');
-    console.log('Body overflow:', getComputedStyle(document.body).overflow);
-    console.log('HTML overflow:', getComputedStyle(document.documentElement).overflow);
-    
-    // Force enable scrolling
-    document.body.style.overflow = 'auto';
-    document.body.style.overflowY = 'auto';
-    document.body.style.height = 'auto';
-    
-    document.documentElement.style.overflow = 'auto';
-    document.documentElement.style.overflowY = 'auto';
-    document.documentElement.style.height = 'auto';
-    
-    // Remove any problematic classes
-    document.body.classList.remove('overflow-hidden');
-    document.documentElement.classList.remove('overflow-hidden');
-  });
 
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: 'smooth'
-        });
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Log initial styles for debugging
+      console.log('Initial styles - Body overflow:', getComputedStyle(document.body).overflow);
+      console.log('Initial styles - HTML overflow:', getComputedStyle(document.documentElement).overflow);
+
+      // Function to enforce scrolling
+      function enableScrolling() {
+        document.body.style.overflow = 'auto';
+        document.body.style.overflowY = 'scroll';
+        document.body.style.height = 'auto';
+        document.documentElement.style.overflow = 'auto';
+        document.documentElement.style.overflowY = 'scroll';
+        document.documentElement.style.height = 'auto';
+        document.body.classList.remove('overflow-hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+        console.log('Scrolling enforced - Body overflow:', getComputedStyle(document.body).overflow);
       }
+
+      // Run initially
+      enableScrolling();
+
+      // Monitor for dynamic changes to overflow
+      const observer = new MutationObserver(() => {
+        if (getComputedStyle(document.body).overflow === 'hidden' || getComputedStyle(document.documentElement).overflow === 'hidden') {
+          console.warn('Overflow: hidden detected! Forcing scroll...');
+          enableScrolling();
+        }
+      });
+
+      observer.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+
+      // Ensure scrolling after Alpine.js initializes
+      document.addEventListener('alpine:initialized', () => {
+        enableScrolling();
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Navbar background change on scroll
+      window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('header');
+        if (window.scrollY > 100) {
+          navbar.classList.add('bg-dark/90');
+          navbar.classList.remove('bg-dark/80');
+        } else {
+          navbar.classList.remove('bg-dark/90');
+          navbar.classList.add('bg-dark/80');
+        }
+      });
     });
-  });
-  
-  // Navbar background change on scroll
-  window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('header');
-    if (window.scrollY > 100) {
-      navbar.classList.add('bg-dark/90');
-      navbar.classList.remove('bg-dark/80');
-    } else {
-      navbar.classList.remove('bg-dark/90');
-      navbar.classList.add('bg-dark/80');
-    }
-  });
-</script>
+  </script>
 </body>
 </html>
