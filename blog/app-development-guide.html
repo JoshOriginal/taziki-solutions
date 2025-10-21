@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>From Concept to Launch: A Guide to Successful App Development | Taziki Solutions Blog</title>
   <style>
-    /* Critical CSS - Same as smart-buildings.html */
     html {
       scroll-behavior: smooth;
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     body {
@@ -15,8 +17,11 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overflow-y: auto !important;
       margin: 0;
       padding: 0;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     .gradient-bg {
@@ -67,8 +72,7 @@
     }
   </style>
   
-  <!-- Same head section as web-development-trends.html -->
-     <!-- Favicons for all devices -->
+  <!-- Favicons for all devices -->
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -76,7 +80,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#F97316">
   
-    <!-- Preconnect for external resources -->
+  <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -116,77 +120,44 @@
     }
   </script>
   <style>
-    html {
-      scroll-behavior: smooth;
-      overflow-y: auto !important;
-      height: auto !important;
-      min-height: 0 !important;
+    .gradient-text {
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      overflow-y: auto !important;
-      margin: 0;
-      padding: 0;
-      height: auto !important;
-      min-height: 0 !important;
+    .navbar-link {
+      position: relative;
+      transition: all 0.3s ease;
     }
     
-    .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    .navbar-link:hover {
+      color: #F97316;
     }
     
-    .navbar-fixed {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, #F97316, #16A34A);
+      transition: width 0.3s ease;
     }
     
-    .prose h2 {
-      color: #fff;
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
+    .navbar-link:hover::after {
+      width: 100%;
     }
     
-    .prose h3 {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .prose p {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      line-height: 1.7;
-    }
-    
-    .prose ul, .prose ol {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose li {
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-    }
-    
-    .prose strong {
-      color: #fff;
-      font-weight: 600;
+    .prose {
+      max-width: none;
     }
   </style>
 </head>
-  <!-- Copy the EXACT same <style> section and all CSS from above -->
 <body class="font-sans">
-  <!-- Same header/navigation as web-development-trends.html -->
-   <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
+  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
@@ -221,8 +192,8 @@
       </div>
     </div>
     
-  <!-- Mobile menu -->
-  <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
           <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
@@ -234,10 +205,11 @@
           <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
           <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
       </div>
-  </div>
+    </div>
+  </header>
 
   <!-- Blog Article -->
-  <article class="pt-32 pb-20 gradient-bg">
+  <article class="pt-24 pb-20 gradient-bg">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
       <!-- Back to Blog -->
       <div class="mb-8">
@@ -416,8 +388,7 @@
     </div>
   </article>
 
-  <!-- Same footer as web-development-trends.html -->
-   <footer class="pt-20 pb-10 gradient-bg">
+  <footer class="pt-20 pb-10 gradient-bg">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="border-t border-gray-700/50 pt-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -495,9 +466,10 @@
       });
     });
 
-    // Enforce scrolling
+    // Enforce scrolling with debug
     document.addEventListener('DOMContentLoaded', function() {
       function enableScrolling() {
+        console.log('Enforcing scrolling...');
         document.body.style.overflowY = 'auto !important';
         document.body.style.height = 'auto !important';
         document.documentElement.style.overflowY = 'auto !important';
@@ -508,6 +480,7 @@
 
       const observer = new MutationObserver(() => {
         if (getComputedStyle(document.body).overflowY === 'hidden' || getComputedStyle(document.documentElement).overflowY === 'hidden') {
+          console.log('Scroll blocked, re-enforcing...');
           enableScrolling();
         }
       });
@@ -516,6 +489,7 @@
       observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
 
       document.addEventListener('alpine:initialized', () => {
+        console.log('Alpine initialized, re-enforcing scrolling...');
         enableScrolling();
       });
     });
