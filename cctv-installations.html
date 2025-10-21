@@ -54,23 +54,20 @@
     }
   </script>
   <style id="app-style">
-    /* Fixed scrolling issue - More aggressive approach */
+    /* Fixed scrolling issue */
     html {
       scroll-behavior: smooth;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-      height: auto !important;
+      overflow-x: hidden;
     }
     
     body {
       background-color: #0f172a;
       color: #fff;
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
+      overflow-x: hidden;
+      overflow-y: auto;
       min-height: 100vh;
       position: relative;
-      height: auto !important;
     }
     
     .gradient-bg {
@@ -227,25 +224,7 @@
     /* Ensure all sections allow content to flow naturally */
     section {
       position: relative;
-      overflow: visible !important;
-    }
-    
-    /* Force scrolling on all containers */
-    * {
-      max-height: none !important;
-    }
-
-        /* Nuclear option - force scrolling */
-    html, body {
-      overflow: auto !important;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-      height: auto !important;
-      max-height: none !important;
-    }
-
-    body > * {
-      overflow: visible !important;
+      overflow: visible;
     }
   </style>
 
