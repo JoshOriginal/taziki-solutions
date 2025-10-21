@@ -234,6 +234,19 @@
     * {
       max-height: none !important;
     }
+
+        /* Nuclear option - force scrolling */
+    html, body {
+      overflow: auto !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      height: auto !important;
+      max-height: none !important;
+    }
+
+    body > * {
+      overflow: visible !important;
+    }
   </style>
 
 </head>
