@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>5 Web Development Trends That Will Dominate 2025 | Taziki Solutions Blog</title>
   <style>
-    /* Critical CSS - Same as smart-buildings.html */
     html {
       scroll-behavior: smooth;
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     body {
@@ -15,8 +17,11 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overflow-y: auto !important;
       margin: 0;
       padding: 0;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     .gradient-bg {
@@ -107,31 +112,11 @@
     }
   </script>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
-    
     .gradient-text {
       background: linear-gradient(90deg, #F97316, #16A34A);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-    }
-    
-    .navbar-fixed {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
     }
     
     .navbar-link {
@@ -161,53 +146,9 @@
     .prose {
       max-width: none;
     }
-    
-    .prose h2 {
-      color: #fff;
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .prose h3 {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .prose p {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      line-height: 1.7;
-    }
-    
-    .prose ul {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose li {
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-    }
-    
-    .prose ol {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose strong {
-      color: #fff;
-      font-weight: 600;
-    }
   </style>
 </head>
-<body class="min-h-screen font-sans">
+<body class="font-sans">
   <!-- Header/Navigation -->
   <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,8 +185,8 @@
       </div>
     </div>
     
-  <!-- Mobile menu -->
-  <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
           <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
@@ -257,10 +198,11 @@
           <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
           <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
       </div>
-  </div>
+    </div>
+  </header>
 
   <!-- Blog Article -->
-  <article class="pt-32 pb-20 gradient-bg">
+  <article class="pt-24 pb-20 gradient-bg">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
       <!-- Back to Blog -->
       <div class="mb-8">
@@ -496,6 +438,31 @@
             behavior: 'smooth'
           });
         }
+      });
+    });
+
+    // Enforce scrolling
+    document.addEventListener('DOMContentLoaded', function() {
+      function enableScrolling() {
+        document.body.style.overflowY = 'auto !important';
+        document.body.style.height = 'auto !important';
+        document.documentElement.style.overflowY = 'auto !important';
+        document.documentElement.style.height = 'auto !important';
+      }
+
+      enableScrolling();
+
+      const observer = new MutationObserver(() => {
+        if (getComputedStyle(document.body).overflowY === 'hidden' || getComputedStyle(document.documentElement).overflowY === 'hidden') {
+          enableScrolling();
+        }
+      });
+
+      observer.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+
+      document.addEventListener('alpine:initialized', () => {
+        enableScrolling();
       });
     });
   </script>
