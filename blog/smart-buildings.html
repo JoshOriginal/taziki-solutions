@@ -55,6 +55,9 @@
   <style>
     html {
       scroll-behavior: smooth;
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     body {
@@ -62,89 +65,56 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overflow-y: scroll !important;
+      margin: 0;
+      padding: 0;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     .gradient-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     }
     
-    .gradient-text {
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
     .navbar-fixed {
+      @apply fixed top-0 left-0 w-full z-50 bg-dark/80 border-b border-dark-lighter/30;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
     
-    .navbar-link {
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .navbar-link:hover {
-      color: #F97316;
-    }
-    
-    .navbar-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      transition: width 0.3s ease;
-    }
-    
-    .navbar-link:hover::after {
-      width: 100%;
-    }
-    
-    .prose {
-      max-width: none;
-    }
-    
     .prose h2 {
-      color: #fff;
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
+      @apply text-white text-3xl md:text-4xl font-extrabold mt-8 mb-4;
+      transition: color 0.3s ease;
+    }
+    .prose h2:hover {
+      @apply text-orange-100;
+      text-decoration: underline;
     }
     
     .prose h3 {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
+      @apply text-primary text-2xl md:text-3xl font-semibold mt-8 mb-3;
     }
     
     .prose p {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      line-height: 1.7;
+      @apply text-gray-300 mb-4 leading-relaxed;
     }
     
-    .prose ul {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
+    .prose ul, .prose ol {
+      @apply text-gray-300 mb-4 pl-6;
     }
     
     .prose li {
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
+      @apply mb-6 leading-relaxed;
+    }
+    
+    .prose strong {
+      @apply text-white font-semibold;
     }
   </style>
 </head>
-<body class="min-h-screen font-sans">
+<body style="overflow-y: scroll !important; height: auto !important; min-height: 0 !important;" class="font-sans">
   <!-- Header/Navigation -->
-  <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
+  <header x-data="{ open: false }" class="navbar-fixed">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
@@ -154,18 +124,18 @@
           </a>
         </div>
         
-  <!-- Desktop Navigation -->
-  <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
-      <a href="index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Home</a>
-      <a href="website-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Web Development</a>
-      <a href="app-development.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">App Development</a>
-      <a href="network-cabling.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Network Cabling</a>
-      <a href="cctv-installations.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">CCTV Installations</a>
-      <a href="case-studies.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Case Studies</a>
-      <a href="blog/index.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
-      <a href="faq.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">FAQ</a>
-      <a href="privacy-policy.html" class="navbar-link text-white hover:text-primary px-2 py-1 text-sm">Privacy Policy</a>
-  </nav>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:ml-auto md:flex md:items-center md:space-x-6">
+          <a href="index.html" class="text-white hover:text-primary px-2 py-1 text-sm">Home</a>
+          <a href="website-development.html" class="text-white hover:text-primary px-2 py-1 text-sm">Web Development</a>
+          <a href="app-development.html" class="text-white hover:text-primary px-2 py-1 text-sm">App Development</a>
+          <a href="network-cabling.html" class="text-white hover:text-primary px-2 py-1 text-sm">Network Cabling</a>
+          <a href="cctv-installations.html" class="text-white hover:text-primary px-2 py-1 text-sm">CCTV Installations</a>
+          <a href="case-studies.html" class="text-white hover:text-primary px-2 py-1 text-sm">Case Studies</a>
+          <a href="blog/index.html" class="text-white hover:text-primary px-2 py-1 text-sm">Blog</a>
+          <a href="faq.html" class="text-white hover:text-primary px-2 py-1 text-sm">FAQ</a>
+          <a href="privacy-policy.html" class="text-white hover:text-primary px-2 py-1 text-sm">Privacy Policy</a>
+        </nav>
         
         <!-- Mobile menu button -->
         <div class="-mr-2 flex items-center md:hidden">
@@ -179,8 +149,8 @@
       </div>
     </div>
     
-  <!-- Mobile menu -->
-  <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
+    <!-- Mobile menu -->
+    <div x-show="open" class="mobile-menu md:hidden bg-dark-light border-t border-dark-lighter/30">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a href="index.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Home</a>
           <a href="website-development.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Web Development</a>
@@ -192,10 +162,11 @@
           <a href="faq.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">FAQ</a>
           <a href="privacy-policy.html" @click="open = false" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-dark-lighter">Privacy Policy</a>
       </div>
-  </div>
+    </div>
+  </header>
 
   <!-- Blog Article -->
-  <article class="pt-32 pb-20 gradient-bg">
+  <article class="pt-24 pb-20 gradient-bg">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
       <!-- Back to Blog -->
       <div class="mb-8">
@@ -435,6 +406,37 @@
             behavior: 'smooth'
           });
         }
+      });
+    });
+
+    // Force scrolling with debug
+    document.addEventListener('DOMContentLoaded', function() {
+      function enableScrolling() {
+        console.log('Forcing scrolling at:', new Date().toLocaleTimeString());
+        document.body.style.overflowY = 'scroll !important';
+        document.body.style.height = '100% !important';
+        document.body.style.minHeight = '0 !important';
+        document.documentElement.style.overflowY = 'scroll !important';
+        document.documentElement.style.height = '100% !important';
+        document.documentElement.style.minHeight = '0 !important';
+        // Force a reflow to apply styles
+        document.body.style.display = 'block';
+        setTimeout(() => {
+          console.log('Scroll enforcement completed at:', new Date().toLocaleTimeString());
+          document.body.style.display = '';
+        }, 0);
+      }
+
+      enableScrolling();
+
+      window.addEventListener('load', () => {
+        console.log('Window loaded at:', new Date().toLocaleTimeString(), 're-enforcing scrolling...');
+        enableScrolling();
+      });
+
+      window.addEventListener('resize', () => {
+        console.log('Window resized at:', new Date().toLocaleTimeString(), 're-enforcing scrolling...');
+        enableScrolling();
       });
     });
   </script>
