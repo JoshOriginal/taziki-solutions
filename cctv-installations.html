@@ -54,17 +54,28 @@
     }
   </script>
   <style id="app-style">
+    /* Fixed scrolling issue */
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
-    
+
     body {
       background-color: #0f172a;
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+      position: relative;
     }
-    
+
+    /* Ensure all sections allow content to flow naturally */
+    section {
+      position: relative;
+      overflow: visible;
+    }
+        
     .gradient-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     }
