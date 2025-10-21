@@ -55,6 +55,9 @@
   <style>
     html {
       scroll-behavior: smooth;
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     body {
@@ -62,48 +65,15 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overflow-y: auto !important;
+      margin: 0;
+      padding: 0;
+      height: auto !important;
+      min-height: 0 !important;
     }
     
     .gradient-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
-    
-    .gradient-text {
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(90deg, #F97316, #F97316);
-      transition: all 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-      background: linear-gradient(90deg, #ea580c, #F97316);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
-    }
-    
-    .btn-secondary {
-      background: linear-gradient(90deg, #16A34A, #16A34A);
-      transition: all 0.3s ease;
-    }
-    
-    .btn-secondary:hover {
-      background: linear-gradient(90deg, #15803d, #16A34A);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
-    }
-    
-    .blog-card {
-      transition: all 0.3s ease;
-    }
-    
-    .blog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
     
     .navbar-fixed {
@@ -111,32 +81,46 @@
       -webkit-backdrop-filter: blur(10px);
     }
     
-    .navbar-link {
-      position: relative;
-      transition: all 0.3s ease;
+    .prose h2 {
+      color: #fff;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
     }
     
-    .navbar-link:hover {
-      color: #F97316;
+    .prose h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
     }
     
-    .navbar-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      transition: width 0.3s ease;
+    .prose p {
+      color: #d1d5db;
+      margin-bottom: 1rem;
+      line-height: 1.7;
     }
     
-    .navbar-link:hover::after {
-      width: 100%;
+    .prose ul, .prose ol {
+      color: #d1d5db;
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .prose li {
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+    
+    .prose strong {
+      color: #fff;
+      font-weight: 600;
     }
   </style>
 </head>
-<body class="min-h-screen font-sans">
+<body class="font-sans">
   <!-- Header/Navigation -->
   <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -453,21 +437,30 @@
     </div>
   </footer>
 
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function enableScrolling() {
+      document.body.style.overflowY = 'auto !important';
+      document.body.style.height = 'auto !important';
+      document.documentElement.style.overflowY = 'auto !important';
+      document.documentElement.style.height = 'auto !important';
+    }
+
+    enableScrolling();
+
+    const observer = new MutationObserver(() => {
+      if (getComputedStyle(document.body).overflowY === 'hidden' || getComputedStyle(document.documentElement).overflowY === 'hidden') {
+        enableScrolling();
+      }
     });
-  </script>
+
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+
+    document.addEventListener('alpine:initialized', () => {
+      enableScrolling();
+    });
+  });
+</script>
 </body>
 </html>
