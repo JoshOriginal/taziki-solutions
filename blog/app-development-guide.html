@@ -115,109 +115,76 @@
       }
     }
   </script>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
-    
-    .gradient-text {
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .navbar-fixed {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    
-    .navbar-link {
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .navbar-link:hover {
-      color: #F97316;
-    }
-    
-    .navbar-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: linear-gradient(90deg, #F97316, #16A34A);
-      transition: width 0.3s ease;
-    }
-    
-    .navbar-link:hover::after {
-      width: 100%;
-    }
-    
-    .prose {
-      max-width: none;
-    }
-    
-    .prose h2 {
-      color: #fff;
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .prose h3 {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .prose p {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      line-height: 1.7;
-    }
-    
-    .prose ul {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose li {
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-    }
-    
-    .prose ol {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose strong {
-      color: #fff;
-      font-weight: 600;
-    }
-  </style>
+<style>
+  html {
+    scroll-behavior: smooth;
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  
+  body {
+    background-color: #0f172a;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    margin: 0;
+    padding: 0;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  }
+  
+  .navbar-fixed {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .prose h2 {
+    color: #fff;
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .prose p {
+    color: #d1d5db;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  
+  .prose ul, .prose ol {
+    color: #d1d5db;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .prose li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  
+  .prose strong {
+    color: #fff;
+    font-weight: 600;
+  }
+</style>
 </head>
   <!-- Copy the EXACT same <style> section and all CSS from above -->
-<body class="min-h-screen font-sans">
+<body class="font-sans">
   <!-- Same header/navigation as web-development-trends.html -->
    <header x-data="{ open: false }" class="fixed top-0 left-0 w-full z-50 navbar-fixed bg-dark/80 border-b border-dark-lighter/30">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
