@@ -59,23 +59,18 @@
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
-
+    
     body {
       background-color: #0f172a;
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
-      overflow-y: auto;
+      overflow-y: auto !important;
       min-height: 100vh;
       position: relative;
+      height: auto !important;
     }
-
-    /* Ensure all sections allow content to flow naturally */
-    section {
-      position: relative;
-      overflow: visible;
-    }
-        
+    
     .gradient-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     }
@@ -227,23 +222,10 @@
       border: 2px solid #8B5CF6;
     }
     
-    /* Breadcrumb Styles */
-    .breadcrumb {
-      padding: 1rem 0;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #F97316;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #16A34A;
-    }
-    
-    .breadcrumb span {
-      color: #94a3b8;
+    /* Ensure all sections allow content to flow naturally */
+    section {
+      position: relative;
+      overflow: visible !important;
     }
   </style>
 </head>
@@ -299,19 +281,8 @@
       </div>
   </div>
 
-  <!-- Breadcrumb -->
-  <section class="pt-24 pb-6 gradient-bg">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="breadcrumb">
-        <a href="index.html">Home</a> > 
-        <a href="index.html#services">Services</a> > 
-        <span>CCTV Installations</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hero Section -->
-  <section class="hero-gradient py-16">
+  <!-- Hero Section (Breadcrumb Removed) -->
+  <section class="hero-gradient pt-24 pb-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div class="space-y-6">
