@@ -53,6 +53,11 @@
       }
     }
   </script>
+  <!-- Vercel Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <style id="app-style">
     /* Fixed scrolling issue */
     html {
@@ -624,157 +629,159 @@
   </section>
 
   <!-- Footer -->
-  <footer class="pt-20 pb-10 gradient-bg">
+  <!-- Footer -->
+<footer class="pt-20 pb-10 gradient-bg">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
-        <div class="lg:col-span-5 space-y-6">
-          <h2 class="text-3xl font-bold font-poppins mb-6">Get in <span class="gradient-text">Touch</span></h2>
-          <p class="text-gray-300 mb-8">
-            Have questions about our website development services? Contact us today to discuss your project.
-          </p>
-          <div class="space-y-4">
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                  <i class="fas fa-envelope text-primary"></i>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
+            <div class="lg:col-span-5 space-y-6">
+                <h2 class="text-3xl font-bold font-poppins mb-6">Get in <span class="gradient-text">Touch</span></h2>
+                <p class="text-gray-300 mb-8">
+                    Have questions about our website development services? Contact us today to discuss your project.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                                <i class="fas fa-envelope text-primary"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Email</h3>
+                            <p class="text-gray-300">info@tazikisolutions.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                                <i class="fas fa-phone text-secondary"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Phone</h3>
+                            <p class="text-gray-300">+254 714 294 223</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Location</h3>
+                            <p class="text-gray-300">Nairobi, Kenya</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Email</h3>
-                <p class="text-gray-300">info@tazikisolutions.com</p>
-              </div>
             </div>
             
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                  <i class="fas fa-phone text-secondary"></i>
+            <div class="lg:col-span-7">
+                <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6">Start Your Website Project</h3>
+                    <form action="contact-form.php" method="POST">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="company" class="block text-sm font-medium text-gray-300 mb-2">Company</label>
+                            <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="website-type" class="block text-sm font-medium text-gray-300 mb-2">Website Type</label>
+                            <select id="website-type" name="website-type" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">Select type</option>
+                                <option value="basic">Basic Website</option>
+                                <option value="ecommerce">E-commerce Website</option>
+                                <option value="corporate">Corporate Website</option>
+                                <option value="other">Other (Custom)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tell us about your website requirements and goals..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
+                            Start Project Discussion
+                            <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
                 </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Phone</h3>
-                <p class="text-gray-300">+254 714 294 223</p>
-              </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700/50 pt-10">
+            <!-- Rest of your footer content remains the same -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-3 space-y-4">
+                    <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
+                    <p class="text-gray-300 text-sm">
+                        Empowering businesses through integrated technology solutions since 2020.
+                    </p>
+                </div>
+                
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="network-cabling.html" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
+                        <li><a href="app-development.html" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
+                        <li><a href="website-development.html" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
+                        <li><a href="cctv-installations.html" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
+                        <li><a href="index.html#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
+                        <li><a href="index.html#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
+                        <li><a href="index.html#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#blog" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-3 space-y-4">
+                    <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
+                    <p class="text-gray-300 text-sm">
+                        Stay updated with our latest insights and news.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
-            <div class="flex items-start">
-              <div class="mr-4 mt-1">
-                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <i class="fas fa-map-marker-alt text-blue-500"></i>
-                </div>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">Location</h3>
-                <p class="text-gray-300">Nairobi, Kenya</p>
-              </div>
+            <div class="text-center text-gray-500 text-sm mt-12">
+                <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
             </div>
-          </div>
         </div>
-        
-        <div class="lg:col-span-7">
-          <div class="bg-dark-light/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 shadow-xl">
-            <h3 class="text-2xl font-bold mb-6">Start Your Website Project</h3>
-            <form>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                  <input type="text" id="name" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                </div>
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                  <input type="email" id="email" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                </div>
-              </div>
-              
-              <div class="mb-6">
-                <label for="company" class="block text-sm font-medium text-gray-300 mb-2">Company</label>
-                <input type="text" id="company" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-              </div>
-              
-              <div class="mb-6">
-                <label for="website-type" class="block text-sm font-medium text-gray-300 mb-2">Website Type</label>
-                <select id="website-type" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                  <option value="">Select type</option>
-                  <option value="basic">Basic Website</option>
-                  <option value="ecommerce">E-commerce Website</option>
-                  <option value="corporate">Corporate Website</option>
-                  <option value="other">Other (Custom)</option>
-                </select>
-              </div>
-              
-              <div class="mb-6">
-                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
-                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-dark-lighter border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Tell us about your website requirements and goals..."></textarea>
-              </div>
-              
-              <button type="submit" class="btn-primary w-full px-8 py-4 rounded-lg text-white font-medium shadow-lg hover:shadow-xl transition-all">
-                Start Project Discussion
-                <i class="fas fa-paper-plane ml-2"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-700/50 pt-10">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div class="md:col-span-3 space-y-4">
-            <h3 class="text-xl font-bold font-poppins mb-4">Taziki Solutions</h3>
-            <p class="text-gray-300 text-sm">
-              Empowering businesses through integrated technology solutions since 2020.
-            </p>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Services</h3>
-            <ul class="space-y-2">
-              <li><a href="network-cabling.html" class="text-gray-300 hover:text-primary text-sm">Network Cabling</a></li>
-              <li><a href="app-development.html" class="text-gray-300 hover:text-primary text-sm">App Development</a></li>
-              <li><a href="website-development.html" class="text-gray-300 hover:text-primary text-sm">Website Development</a></li>
-              <li><a href="cctv-installations.html" class="text-gray-300 hover:text-primary text-sm">CCTV Installation</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Company</h3>
-            <ul class="space-y-2">
-              <li><a href="index.html#about" class="text-gray-300 hover:text-primary text-sm">About Us</a></li>
-              <li><a href="index.html#vision" class="text-gray-300 hover:text-primary text-sm">Our Vision</a></li>
-              <li><a href="index.html#mission" class="text-gray-300 hover:text-primary text-sm">Our Mission</a></li>
-              <li><a href="index.html#why-us" class="text-gray-300 hover:text-primary text-sm">Why Choose Us</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="font-semibold mb-4">Resources</h3>
-            <ul class="space-y-2">
-              <li><a href="index.html#blog" class="text-gray-300 hover:text-primary text-sm">Blog</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Case Studies</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">FAQ</a></li>
-              <li><a href="javascript:void(0)" class="text-gray-300 hover:text-primary text-sm">Privacy Policy</a></li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-3 space-y-4">
-            <h3 class="font-semibold mb-4">Subscribe to Our Newsletter</h3>
-            <p class="text-gray-300 text-sm">
-              Stay updated with our latest insights and news.
-            </p>
-            <div class="flex">
-              <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-dark-lighter border border-gray-700 rounded-l-lg text-white focus:outline-none focus:ring-2 focus:ring-primary">
-              <button class="bg-primary px-4 py-3 rounded-r-lg text-white hover:bg-primary/90 transition-colors">
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="text-center text-gray-500 text-sm mt-12">
-          <p>&copy; 2025 Taziki Solutions. All rights reserved.</p>
-        </div>
-      </div>
     </div>
-  </footer>
+</footer>
 
   <!-- AI Chatbot -->
   <div x-data="{ chatOpen: false }" class="fixed bottom-8 right-8 z-50">
