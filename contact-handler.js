@@ -1,4 +1,4 @@
-// Contact Form Handler - Add this to your HTML pages
+﻿// Contact Form Handler - Add this to your HTML pages
 class ContactFormHandler {
   constructor(formSelector = '#contactForm', formId = 'contact-form') {
     this.form = document.querySelector(formSelector) || document.getElementById(formId);
@@ -131,3 +131,4 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
