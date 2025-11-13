@@ -113,7 +113,8 @@ class ContactFormHandler {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  new ContactFormHandler('form[action="contact-form.php"]');
+  // initialize on the contact form by id
+  new ContactFormHandler('#contactForm');
 });
 
 // Add CSS animation
