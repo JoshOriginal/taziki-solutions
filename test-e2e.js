@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
@@ -106,7 +106,7 @@ async function getFeatured() {
 
     // Create blog
     const title = 'E2E Test Blog ' + Date.now();
-    const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-');
+    const slug = title.toLowerCase().replace(/[^\\w\\s-]/g, '').trim().replace(/\\s+/g, '-');
     const blog = {
       title,
       category: 'Testing',
@@ -137,11 +137,11 @@ async function getFeatured() {
 
     const found = (feat.body.blogs || []).some(b => b.title === title || b.slug === slug);
     if (found) {
-      console.log('✅ E2E test succeeded: created blog appears in featured posts');
+      console.log(' E2E test succeeded: created blog appears in featured posts');
       console.log('Public blog URL:', `/blog/${slug}.html`);
       process.exit(0);
     } else {
-      console.error('❌ Created blog not found in featured posts. Featured API returned:', feat.body.blogs.map(b=>b.title));
+      console.error(' Created blog not found in featured posts. Featured API returned:', feat.body.blogs.map(b=>b.title));
       process.exit(1);
     }
 
