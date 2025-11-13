@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Taziki Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .sidebar {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    
+    .btn-primary {
+      @apply bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+    }
+    
+    .btn-secondary {
+      @apply bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+    }
+    
+    .input-field {
+      @apply w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500;
+    }
+    
+    .editor-toolbar {
+      @apply flex gap-2 mb-4 flex-wrap;
+    }
+    
+    .editor-btn {
+      @apply bg-gray-700 hover:bg-gray-600 text-white font-medium py-1 px-3 rounded transition-colors text-sm;
+    }
+    
+    .success-alert {
+      @apply bg-green-900/30 border border-green-700 text-green-300 px-4 py-3 rounded-lg mb-4;
+    }
+    
+    .error-alert {
+      @apply bg-red-900/30 border border-red-700 text-red-300 px-4 py-3 rounded-lg mb-4;
+    }
+  </style>
+</head>
+<body>
+  <div x-data="adminApp()" x-init="init()" class="flex h-screen">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 sidebar border-r border-gray-700">
+      <div class="p-6 border-b border-gray-700">
+        <h1 class="text-2xl font-bold">
+          <span class="text-orange-500">Taziki</span><span class="text-white">Admin</span>
+        </h1>
+      </div>
+      
+      <nav class="p-6 space-y-4">
+        <button @click="currentView = 'dashboard'" :class="currentView === 'dashboard' ? 'bg-orange-500 text-white' : 'text-gray-300 hover:text-white'" class="w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3">
+          <i class="fas fa-chart-line"></i>
+          <span>Dashboard</span>
+        </button>
+        
+        <button @click="currentView = 'blogs'" :class="currentView === 'blogs' ? 'bg-orange-500 text-white' : 'text-gray-300 hover:text-white'" class="w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3">
+          <i class="fas fa-blog"></i>
+          <span>Blog Posts</span>
+        </button>
+        
+        <button @click="currentView = 'create'" :class="currentView === 'create' ? 'bg-orange-500 text-white' : 'text-gray-300 hover:text-white'" class="w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3">
+          <i class="fas fa-plus"></i>
+          <span>Create Blog</span>
+        </button>
+      </nav>
+      
+      <div class="absolute bottom-6 left-6 right-6">
+        <button @click="logout()" class="w-full btn-secondary flex items-center justify-center gap-2">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="flex-1 overflow-auto">
+      <!-- Login View -->
+      <div x-show="currentView === 'login'" class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+            <h2 class="text-3xl font-bold text-center mb-8">Admin Login</h2>
+            
+            <div x-show="loginError" class="error-alert" x-text="loginError"></div>
+            
+            <form @submit.prevent="handleLogin()">
+              <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Username</label>
+                <input x-model="loginForm.username" type="text" class="input-field" placeholder="Enter username" required>
+              </div>
+              
+              <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Password</label>
+                <input x-model="loginForm.password" type="password" class="input-field" placeholder="Enter password" required>
+              </div>
+              
+              <button type="submit" class="btn-primary w-full" :disabled="loading">
+                <span x-show="!loading">Login</span>
+                <span x-show="loading"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dashboard View -->
+      <div x-show="currentView === 'dashboard'" class="p-8">
+        <h2 class="text-3xl font-bold mb-8">Dashboard</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-400 text-sm">Total Blogs</p>
+                <p class="text-3xl font-bold" x-text="stats.totalBlogs"></p>
+              </div>
+              <i class="fas fa-blog text-orange-500 text-4xl opacity-20"></i>
+            </div>
+          </div>
+          
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-400 text-sm">Published</p>
+                <p class="text-3xl font-bold" x-text="stats.publishedBlogs"></p>
+              </div>
+              <i class="fas fa-check-circle text-green-500 text-4xl opacity-20"></i>
+            </div>
+          </div>
+          
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-400 text-sm">Drafts</p>
+                <p class="text-3xl font-bold" x-text="stats.draftBlogs"></p>
+              </div>
+              <i class="fas fa-file-alt text-blue-500 text-4xl opacity-20"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-4">Recent Blog Posts</h3>
+          <div class="space-y-2">
+            <template x-for="blog in blogs.slice(0, 5)" :key="blog.id">
+              <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                <div>
+                  <p class="font-medium" x-text="blog.title"></p>
+                  <p class="text-sm text-gray-400" x-text="blog.status"></p>
+                </div>
+                <span class="text-xs bg-gray-700 px-3 py-1 rounded" x-text="blog.category"></span>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blogs View -->
+      <div x-show="currentView === 'blogs'" class="p-8">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold">Blog Posts</h2>
+          <button @click="currentView = 'create'" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            <span>New Blog</span>
+          </button>
+        </div>
+        
+        <div x-show="successMessage" class="success-alert" x-text="successMessage"></div>
+        <div x-show="errorMessage" class="error-alert" x-text="errorMessage"></div>
+        
+        <!-- Filter tabs -->
+        <div class="flex gap-4 mb-6">
+          <button @click="filterStatus = 'all'" :class="filterStatus === 'all' ? 'btn-primary' : 'btn-secondary'" class="flex items-center gap-2">
+            <span>All</span>
+            <span class="text-sm" x-text="'(' + blogs.length + ')'"></span>
+          </button>
+          <button @click="filterStatus = 'published'" :class="filterStatus === 'published' ? 'btn-primary' : 'btn-secondary'" class="flex items-center gap-2">
+            <span>Published</span>
+            <span class="text-sm" x-text="'(' + blogs.filter(b => b.status === 'published').length + ')'"></span>
+          </button>
+          <button @click="filterStatus = 'draft'" :class="filterStatus === 'draft' ? 'btn-primary' : 'btn-secondary'" class="flex items-center gap-2">
+            <span>Drafts</span>
+            <span class="text-sm" x-text="'(' + blogs.filter(b => b.status === 'draft').length + ')'"></span>
+          </button>
+        </div>
+        
+        <!-- Blogs Table -->
+        <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-gray-800 border-b border-gray-700">
+              <tr>
+                <th class="text-left px-6 py-4">Title</th>
+                <th class="text-left px-6 py-4">Category</th>
+                <th class="text-left px-6 py-4">Status</th>
+                <th class="text-left px-6 py-4">Date</th>
+                <th class="text-center px-6 py-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="blog in getFilteredBlogs()" :key="blog.id">
+                <tr class="border-b border-gray-700 hover:bg-gray-800/50 transition-colors">
+                  <td class="px-6 py-4 font-medium" x-text="blog.title"></td>
+                  <td class="px-6 py-4 text-gray-400" x-text="blog.category"></td>
+                  <td class="px-6 py-4">
+                    <span :class="blog.status === 'published' ? 'bg-green-900 text-green-300' : 'bg-blue-900 text-blue-300'" class="px-3 py-1 rounded-full text-xs font-medium" x-text="blog.status"></span>
+                  </td>
+                  <td class="px-6 py-4 text-gray-400 text-sm" x-text="new Date(blog.dateCreated).toLocaleDateString()"></td>
+                  <td class="px-6 py-4 flex justify-center gap-2">
+                    <button @click="editBlog(blog)" class="text-blue-400 hover:text-blue-300">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button @click="deleteBlog(blog.id)" class="text-red-400 hover:text-red-300" onclick="return confirm('Are you sure?')">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Create/Edit Blog View -->
+      <div x-show="currentView === 'create'" class="p-8">
+        <h2 class="text-3xl font-bold mb-8" x-text="editingBlog ? 'Edit Blog Post' : 'Create New Blog Post'"></h2>
+        
+        <div x-show="successMessage" class="success-alert" x-text="successMessage"></div>
+        <div x-show="errorMessage" class="error-alert" x-text="errorMessage"></div>
+        
+        <form @submit.prevent="saveBlog()" class="max-w-4xl">
+          <!-- Title -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Title *</label>
+            <input x-model="blogForm.title" type="text" class="input-field" placeholder="Enter blog title" required>
+          </div>
+          
+          <!-- Row: Category & Featured -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-sm font-medium mb-2">Category</label>
+              <select x-model="blogForm.category" class="input-field">
+                <option>Technology Trends</option>
+                <option>Web Development</option>
+                <option>App Development</option>
+                <option>Business Growth</option>
+                <option>Network Security</option>
+                <option>Cloud Computing</option>
+                <option>General</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Featured</label>
+              <div class="flex items-center gap-4">
+                <label class="flex items-center gap-2">
+                  <input x-model="blogForm.featured" type="checkbox" class="w-4 h-4">
+                  <span>Make this blog featured</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Excerpt -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Excerpt</label>
+            <textarea x-model="blogForm.excerpt" class="input-field" rows="2" placeholder="Brief summary (will be auto-generated if empty)"></textarea>
+          </div>
+          
+          <!-- Image URL + Upload -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Featured Image</label>
+            <div class="flex gap-2 items-center">
+              <input x-model="blogForm.image" type="text" class="input-field" placeholder="https://example.com/image.jpg">
+              <input id="imageFile" type="file" accept="image/*" class="hidden" @change="fileChanged($event)">
+              <button type="button" @click="document.getElementById('imageFile').click()" class="btn-secondary">Choose File</button>
+              <button type="button" @click="uploadImage()" class="btn-primary" :disabled="uploading"> 
+                <span x-show="!uploading">Upload</span>
+                <span x-show="uploading"><i class="fas fa-spinner fa-spin"></i></span>
+              </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">You can paste an image URL or upload an image file (stored in /images/uploads)</p>
+          </div>
+          
+          <!-- Author -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Author</label>
+            <input x-model="blogForm.author" type="text" class="input-field" placeholder="Taziki Solutions">
+          </div>
+          
+          <!-- Content -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Content (HTML) *</label>
+            <div class="editor-toolbar">
+              <button type="button" @click="insertTag('<h2>', '</h2>')" class="editor-btn" title="Heading 2">
+                <i class="fas fa-heading"></i> H2
+              </button>
+              <button type="button" @click="insertTag('<h3>', '</h3>')" class="editor-btn" title="Heading 3">
+                H3
+              </button>
+              <button type="button" @click="insertTag('<p>', '</p>')" class="editor-btn" title="Paragraph">
+                <i class="fas fa-paragraph"></i>
+              </button>
+              <button type="button" @click="insertTag('<strong>', '</strong>')" class="editor-btn" title="Bold">
+                <i class="fas fa-bold"></i>
+              </button>
+              <button type="button" @click="insertTag('<ul><li>', '</li></ul>')" class="editor-btn" title="List">
+                <i class="fas fa-list"></i>
+              </button>
+              <button type="button" @click="insertTag('<a href=\"#\">', '</a>')" class="editor-btn" title="Link">
+                <i class="fas fa-link"></i>
+              </button>
+              <button type="button" @click="insertTag('<img src=\"\" alt=\"\" />')" class="editor-btn" title="Image">
+                <i class="fas fa-image"></i>
+              </button>
+            </div>
+            <textarea x-model="blogForm.content" class="input-field" rows="12" placeholder="Write your blog content in HTML format" required></textarea>
+            <p class="text-xs text-gray-400 mt-1">You can use HTML tags or plain text with basic formatting</p>
+          </div>
+          
+          <!-- Status -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Status</label>
+            <select x-model="blogForm.status" class="input-field">
+              <option value="draft">Draft (Not visible on site)</option>
+              <option value="published">Published (Visible on site)</option>
+            </select>
+          </div>
+          
+          <!-- Buttons -->
+          <div class="flex gap-4">
+            <button type="submit" class="btn-primary flex items-center gap-2" :disabled="loading">
+              <span x-show="!loading"><i class="fas fa-save"></i> <span x-text="editingBlog ? 'Update Blog' : 'Create Blog'"></span></span>
+              <span x-show="loading"><i class="fas fa-spinner fa-spin"></i> Saving...</span>
+            </button>
+            
+            <button type="button" @click="resetForm()" class="btn-secondary">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+            
+            <button type="button" @click="currentView = 'blogs'; resetForm();" class="btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function adminApp() {
+      return {
+  currentView: 'login',
+  loading: false,
+  uploading: false,
+  _selectedFile: null,
+  adminToken: localStorage.getItem('adminToken') || null,
+        
+        // Login
+        loginForm: { username: '', password: '' },
+        loginError: '',
+        
+        // Blogs
+        blogs: [],
+        blogForm: {
+          title: '',
+          category: 'General',
+          excerpt: '',
+          content: '',
+          featured: false,
+          image: '/images/blog-default.jpg',
+          author: 'Taziki Solutions',
+          status: 'draft'
+        },
+        editingBlog: null,
+        filterStatus: 'all',
+        successMessage: '',
+        errorMessage: '',
+        stats: {
+          totalBlogs: 0,
+          publishedBlogs: 0,
+          draftBlogs: 0
+        },
+        
+        async init() {
+          if (this.adminToken) {
+            this.currentView = 'dashboard';
+            await this.loadBlogs();
+            this.updateStats();
+          } else {
+            this.currentView = 'login';
+          }
+        },
+        
+        async handleLogin() {
+          this.loading = true;
+          this.loginError = '';
+          
+          try {
+            const response = await fetch('/admin/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(this.loginForm)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+              this.adminToken = data.token;
+              localStorage.setItem('adminToken', data.token);
+              this.currentView = 'dashboard';
+              this.loginForm = { username: '', password: '' };
+              await this.loadBlogs();
+              this.updateStats();
+            } else {
+              this.loginError = data.message || 'Login failed';
+            }
+          } catch (error) {
+            this.loginError = 'Connection error: ' + error.message;
+          } finally {
+            this.loading = false;
+          }
+        },
+        
+        logout() {
+          if (confirm('Are you sure you want to logout?')) {
+            localStorage.removeItem('adminToken');
+            this.adminToken = null;
+            this.currentView = 'login';
+            this.blogs = [];
+          }
+        },
+        
+        async loadBlogs() {
+          try {
+            const response = await fetch('/admin/blogs', {
+              headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+              this.blogs = data.blogs;
+            } else {
+              this.errorMessage = data.message;
+            }
+          } catch (error) {
+            this.errorMessage = 'Failed to load blogs: ' + error.message;
+          }
+        },
+        
+        updateStats() {
+          this.stats.totalBlogs = this.blogs.length;
+          this.stats.publishedBlogs = this.blogs.filter(b => b.status === 'published').length;
+          this.stats.draftBlogs = this.blogs.filter(b => b.status === 'draft').length;
+        },
+        
+        getFilteredBlogs() {
+          if (this.filterStatus === 'all') {
+            return this.blogs;
+          }
+          return this.blogs.filter(b => b.status === this.filterStatus);
+        },
+        
+        async saveBlog() {
+          if (!this.blogForm.title || !this.blogForm.content) {
+            this.errorMessage = 'Title and content are required';
+            return;
+          }
+          
+          this.loading = true;
+          this.successMessage = '';
+          this.errorMessage = '';
+          
+          try {
+            const method = this.editingBlog ? 'PUT' : 'POST';
+            const url = this.editingBlog ? `/admin/blogs/${this.editingBlog.id}` : '/admin/blogs';
+            
+            const response = await fetch(url, {
+              method,
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.adminToken}`
+              },
+              body: JSON.stringify(this.blogForm)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+              this.successMessage = data.message;
+              await this.loadBlogs();
+              this.updateStats();
+              
+              setTimeout(() => {
+                this.resetForm();
+                this.currentView = 'blogs';
+              }, 1500);
+            } else {
+              this.errorMessage = data.message || 'Failed to save blog';
+            }
+          } catch (error) {
+            this.errorMessage = 'Error: ' + error.message;
+          } finally {
+            this.loading = false;
+          }
+        },
+        // File upload helpers
+        fileChanged(e) {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          this._selectedFile = file;
+        },
+
+        async uploadImage() {
+          if (!this._selectedFile) {
+            this.errorMessage = 'No file selected for upload';
+            return;
+          }
+          this.uploading = true;
+          this.errorMessage = '';
+          try {
+            const form = new FormData();
+            form.append('image', this._selectedFile);
+            const resp = await fetch('/admin/upload-image', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${this.adminToken}` },
+              body: form
+            });
+            const data = await resp.json();
+            if (data.success && data.url) {
+              this.blogForm.image = data.url;
+              this.successMessage = 'Image uploaded successfully';
+            } else {
+              this.errorMessage = data.message || 'Upload failed';
+            }
+          } catch (err) {
+            this.errorMessage = 'Upload error: ' + err.message;
+          } finally {
+            this.uploading = false;
+            this._selectedFile = null;
+            document.getElementById('imageFile').value = '';
+          }
+        },
+        
+        editBlog(blog) {
+          this.editingBlog = blog;
+          this.blogForm = { ...blog };
+          this.currentView = 'create';
+          document.querySelector('html').scrollTop = 0;
+        },
+        
+        async deleteBlog(id) {
+          this.loading = true;
+          try {
+            const response = await fetch(`/admin/blogs/${id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+              this.successMessage = data.message;
+              await this.loadBlogs();
+              this.updateStats();
+            } else {
+              this.errorMessage = data.message || 'Failed to delete blog';
+            }
+          } catch (error) {
+            this.errorMessage = 'Error: ' + error.message;
+          } finally {
+            this.loading = false;
+          }
+        },
+        
+        resetForm() {
+          this.blogForm = {
+            title: '',
+            category: 'General',
+            excerpt: '',
+            content: '',
+            featured: false,
+            image: '/images/blog-default.jpg',
+            author: 'Taziki Solutions',
+            status: 'draft'
+          };
+          this.editingBlog = null;
+          this.successMessage = '';
+          this.errorMessage = '';
+        },
+        
+        insertTag(openTag, closeTag) {
+          const textarea = document.querySelector('textarea[placeholder*="Write your blog"]');
+          if (!textarea) return;
+          
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          const selected = this.blogForm.content.substring(start, end);
+          const text = this.blogForm.content;
+          
+          this.blogForm.content = text.substring(0, start) + openTag + selected + closeTag + text.substring(end);
+          
+          setTimeout(() => {
+            textarea.focus();
+            textarea.selectionStart = start + openTag.length;
+          }, 0);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
