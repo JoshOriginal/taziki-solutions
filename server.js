@@ -12,6 +12,35 @@ const blogRoutes = require('./blog-routes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Security headers middleware
+app.use((req, res, next) => {
+  // Security headers
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  next();
+});
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  res.sendStatus(200);
+});
+
+// Force HTTPS in production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -43,23 +72,35 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
-// Initialize database
-initializeDB().catch(err => console.error('DB init error:', err));
 
-// Email configuration
+// Improved Email configuration
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // or your email service
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // Use TLS
   auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASSWORD // Your app password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false // For Railway environment
   }
 });
 
-// Route to handle contact form submissions
+// Test email connection on startup
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log('❌ Email configuration error:', error);
+  } else {
+    console.log('✅ Email server is ready to send messages');
+  }
+});
+
+// Improved contact form route with better error handling
 app.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
-  // Validation
+  // Enhanced validation
   if (!name || !email || !subject || !message) {
     return res.status(400).json({ 
       success: false, 
@@ -67,54 +108,114 @@ app.post('/contact', async (req, res) => {
     });
   }
 
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ 
+      success: false, 
+      error: 'Please enter a valid email address' 
+    });
+  }
+
   try {
-    // Email to you (admin)
+    // Email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Taziki Solutions" <${process.env.EMAIL_USER}>`,
       to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
-      subject: `New Contact Form Submission: ${subject}`,
+      subject: `New Contact Form: ${subject}`,
       html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #F97316;">New Contact Form Submission</h2>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Subject:</strong> ${subject}</p>
+            <p><strong>Message:</strong></p>
+            <p style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #F97316;">
+              ${message.replace(/\n/g, '<br>')}
+            </p>
+          </div>
+          <p style="color: #666; font-size: 12px; margin-top: 20px;">
+            This message was sent from your website contact form.
+          </p>
+        </div>
       `
     };
 
     // Confirmation email to user
     const userMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Taziki Solutions" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: 'We received your message - Taziki Solutions',
+      subject: 'We Received Your Message - Taziki Solutions',
       html: `
-        <h2>Thank you for contacting us!</h2>
-        <p>Hi ${name},</p>
-        <p>We have received your message and will get back to you as soon as possible.</p>
-        <p><strong>Your message details:</strong></p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p>Best regards,<br>Taziki Solutions Team</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #F97316;">Thank You for Contacting Us!</h2>
+          <p>Hi ${name},</p>
+          <p>We have received your message and will get back to you within 24 hours.</p>
+          
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #333; margin-top: 0;">Your Message Details:</h3>
+            <p><strong>Subject:</strong> ${subject}</p>
+            <p><strong>Message:</strong></p>
+            <p style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #16A34A;">
+              ${message.replace(/\n/g, '<br>')}
+            </p>
+          </div>
+          
+          <div style="border-top: 2px solid #F97316; padding-top: 20px; margin-top: 30px;">
+            <p><strong>Taziki Solutions Team</strong></p>
+            <p>Email: info@tazikisolutions.com</p>
+            <p>Phone: +254 714 294 223</p>
+            <p>Nairobi, Kenya</p>
+          </div>
+        </div>
       `
     };
 
-    // Send both emails
-    await transporter.sendMail(adminMailOptions);
-    await transporter.sendMail(userMailOptions);
+    // Send both emails with timeout
+    const sendEmail = (mailOptions) => {
+      return new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error('Email timeout'));
+        }, 15000); // 15 second timeout
 
+        transporter.sendMail(mailOptions, (error, info) => {
+          clearTimeout(timeout);
+          if (error) {
+            reject(error);
+          } else {
+            resolve(info);
+          }
+        });
+      });
+    };
+
+    await sendEmail(adminMailOptions);
+    await sendEmail(userMailOptions);
+
+    console.log('✅ Contact form submission processed successfully');
     res.json({ 
       success: true, 
-      message: 'Your message has been sent successfully!' 
+      message: 'Your message has been sent successfully! We will get back to you soon.' 
     });
 
   } catch (error) {
-    console.error('Email error:', error);
+    console.error('❌ Email error details:', error);
+    
+    // More specific error messages
+    let errorMessage = 'Failed to send message. Please try again later.';
+    
+    if (error.code === 'EAUTH') {
+      errorMessage = 'Email configuration error. Please check your email settings.';
+    } else if (error.message === 'Email timeout') {
+      errorMessage = 'Email service timeout. Please try again in a few moments.';
+    } else if (error.code === 'ECONNECTION') {
+      errorMessage = 'Cannot connect to email service. Please check your internet connection.';
+    }
+
     res.status(500).json({ 
       success: false, 
-      error: 'Failed to send message. Please try again later.' 
+      error: errorMessage 
     });
   }
 });
@@ -155,12 +256,13 @@ app.post('/admin/login', (req, res) => {
   }
 });
 
+
 // Admin logout
 app.post('/admin/logout', requireAuth, (req, res) => {
   logoutAdmin(req.adminToken);
   res.json({ 
-    success: true, 
-    message: 'Logged out successfully' 
+      success: true, 
+      message: 'Logged out successfully' 
   });
 });
 
