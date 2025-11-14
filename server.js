@@ -96,6 +96,118 @@ transporter.verify(function(error, success) {
   }
 });
 
+// =================== DEBUG ROUTES ===================
+
+// DEBUG ROUTE - Check email configuration
+app.get('/debug-email', (req, res) => {
+  const emailConfig = {
+    EMAIL_USER: process.env.EMAIL_USER ? '✅ Set' : '❌ Not Set',
+    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? '✅ Set (' + process.env.EMAIL_PASSWORD.substring(0, 4) + '...)' : '❌ Not Set', 
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL ? '✅ Set' : '❌ Not Set',
+    NODE_ENV: process.env.NODE_ENV || '❌ Not Set',
+    email_service: 'Gmail SMTP',
+    status: 'Debug endpoint active'
+  };
+  
+  console.log('📧 Email Configuration Debug:');
+  console.log('- EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
+  console.log('- EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'Set' : 'NOT SET');
+  console.log('- ADMIN_EMAIL:', process.env.ADMIN_EMAIL ? 'Set' : 'NOT SET');
+  
+  res.json(emailConfig);
+});
+
+// Test email route - try sending a test email
+app.get('/test-email', async (req, res) => {
+  try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+      return res.json({ 
+        success: false, 
+        error: 'Email credentials not configured',
+        EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Not Set',
+        EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? 'Set' : 'Not Set'
+      });
+    }
+
+    const testMailOptions = {
+      from: `"Taziki Test" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+      subject: 'Test Email from Taziki Solutions',
+      html: `
+        <h2>Test Email</h2>
+        <p>This is a test email from your Taziki Solutions website.</p>
+        <p>If you received this, your email configuration is working!</p>
+        <p>Time sent: ${new Date().toString()}</p>
+      `
+    };
+
+    await transporter.sendMail(testMailOptions);
+    res.json({ 
+      success: true, 
+      message: 'Test email sent successfully! Check your inbox.' 
+    });
+    
+  } catch (error) {
+    console.error('Test email error:', error);
+    res.json({ 
+      success: false, 
+      error: error.message,
+      code: error.code 
+    });
+  }
+});
+
+// Simple contact form test (bypasses all validation)
+app.post('/test-contact', async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  try {
+    console.log('📨 Test contact form submission:', { name, email, subject });
+
+    const adminMailOptions = {
+      from: `"Taziki Solutions" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+      subject: `TEST Contact: ${subject}`,
+      html: `
+        <h2>TEST Contact Form</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong> ${message}</p>
+        <p><em>This is a test message</em></p>
+      `
+    };
+
+    await transporter.sendMail(adminMailOptions);
+    
+    res.json({ 
+      success: true, 
+      message: 'Test contact form working!' 
+    });
+
+  } catch (error) {
+    console.error('Test contact error:', error);
+    res.json({ 
+      success: false, 
+      error: error.message,
+      code: error.code 
+    });
+  }
+});
+
+// TEMPORARY - Show all environment variables (remove after debugging)
+app.get('/env', (req, res) => {
+  const envVars = {};
+  for (const key in process.env) {
+    if (key.includes('EMAIL') || key.includes('MAIL') || key === 'NODE_ENV') {
+      envVars[key] = process.env[key] ? 'SET' : 'NOT SET';
+    }
+  }
+  res.json(envVars);
+});
+
+// =================== CONTACT FORM ROUTE ===================
+
 // Improved contact form route with better error handling
 app.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -256,7 +368,6 @@ app.post('/admin/login', (req, res) => {
   }
 });
 
-
 // Admin logout
 app.post('/admin/logout', requireAuth, (req, res) => {
   logoutAdmin(req.adminToken);
@@ -272,74 +383,6 @@ app.use(blogRoutes);
 // Serve static files (after API routes)
 app.use(express.static('.'));
 
-// Test email connection on startup
-transporter.verify(function(error, success) {
-  if (error) {
-    console.log('❌ Email configuration error:', error);
-  } else {
-    console.log('✅ Email server is ready to send messages');
-  }
-});
-
-// DEBUG ROUTE - Add this to check email configuration
-app.get('/debug-email', (req, res) => {
-  const emailConfig = {
-    EMAIL_USER: process.env.EMAIL_USER ? '✅ Set' : '❌ Not Set',
-    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? '✅ Set (' + process.env.EMAIL_PASSWORD.substring(0, 4) + '...)' : '❌ Not Set', 
-    ADMIN_EMAIL: process.env.ADMIN_EMAIL ? '✅ Set' : '❌ Not Set',
-    NODE_ENV: process.env.NODE_ENV || '❌ Not Set',
-    email_service: 'Gmail SMTP',
-    status: 'Debug endpoint active'
-  };
-  
-  console.log('📧 Email Configuration Debug:');
-  console.log('- EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
-  console.log('- EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'Set' : 'NOT SET');
-  console.log('- ADMIN_EMAIL:', process.env.ADMIN_EMAIL ? 'Set' : 'NOT SET');
-  
-  res.json(emailConfig);
-});
-
-// Test email route - try sending a test email
-app.get('/test-email', async (req, res) => {
-  try {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-      return res.json({ 
-        success: false, 
-        error: 'Email credentials not configured',
-        EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Not Set',
-        EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? 'Set' : 'Not Set'
-      });
-    }
-
-    const testMailOptions = {
-      from: `"Taziki Test" <${process.env.EMAIL_USER}>`,
-      to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
-      subject: 'Test Email from Taziki Solutions',
-      html: `
-        <h2>Test Email</h2>
-        <p>This is a test email from your Taziki Solutions website.</p>
-        <p>If you received this, your email configuration is working!</p>
-        <p>Time sent: ${new Date().toString()}</p>
-      `
-    };
-
-    await transporter.sendMail(testMailOptions);
-    res.json({ 
-      success: true, 
-      message: 'Test email sent successfully! Check your inbox.' 
-    });
-    
-  } catch (error) {
-    console.error('Test email error:', error);
-    res.json({ 
-      success: false, 
-      error: error.message,
-      code: error.code 
-    });
-  }
-});
-
 // Test route
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running' });
@@ -350,4 +393,8 @@ app.listen(PORT, () => {
   console.log(`📧 Contact form endpoint: POST http://localhost:${PORT}/contact`);
   console.log(`🔐 Admin dashboard: http://localhost:${PORT}/admin/dashboard.html`);
   console.log(`📝 Blog API: http://localhost:${PORT}/api/blogs/published`);
+  console.log(`🐛 Debug routes available:`);
+  console.log(`   - https://tazikisolutions.com/debug-email`);
+  console.log(`   - https://tazikisolutions.com/test-email`);
+  console.log(`   - https://tazikisolutions.com/env`);
 });
