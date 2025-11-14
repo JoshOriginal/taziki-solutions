@@ -272,6 +272,74 @@ app.use(blogRoutes);
 // Serve static files (after API routes)
 app.use(express.static('.'));
 
+// Test email connection on startup
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log('❌ Email configuration error:', error);
+  } else {
+    console.log('✅ Email server is ready to send messages');
+  }
+});
+
+// DEBUG ROUTE - Add this to check email configuration
+app.get('/debug-email', (req, res) => {
+  const emailConfig = {
+    EMAIL_USER: process.env.EMAIL_USER ? '✅ Set' : '❌ Not Set',
+    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? '✅ Set (' + process.env.EMAIL_PASSWORD.substring(0, 4) + '...)' : '❌ Not Set', 
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL ? '✅ Set' : '❌ Not Set',
+    NODE_ENV: process.env.NODE_ENV || '❌ Not Set',
+    email_service: 'Gmail SMTP',
+    status: 'Debug endpoint active'
+  };
+  
+  console.log('📧 Email Configuration Debug:');
+  console.log('- EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
+  console.log('- EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'Set' : 'NOT SET');
+  console.log('- ADMIN_EMAIL:', process.env.ADMIN_EMAIL ? 'Set' : 'NOT SET');
+  
+  res.json(emailConfig);
+});
+
+// Test email route - try sending a test email
+app.get('/test-email', async (req, res) => {
+  try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+      return res.json({ 
+        success: false, 
+        error: 'Email credentials not configured',
+        EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Not Set',
+        EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? 'Set' : 'Not Set'
+      });
+    }
+
+    const testMailOptions = {
+      from: `"Taziki Test" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+      subject: 'Test Email from Taziki Solutions',
+      html: `
+        <h2>Test Email</h2>
+        <p>This is a test email from your Taziki Solutions website.</p>
+        <p>If you received this, your email configuration is working!</p>
+        <p>Time sent: ${new Date().toString()}</p>
+      `
+    };
+
+    await transporter.sendMail(testMailOptions);
+    res.json({ 
+      success: true, 
+      message: 'Test email sent successfully! Check your inbox.' 
+    });
+    
+  } catch (error) {
+    console.error('Test email error:', error);
+    res.json({ 
+      success: false, 
+      error: error.message,
+      code: error.code 
+    });
+  }
+});
+
 // Test route
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running' });
