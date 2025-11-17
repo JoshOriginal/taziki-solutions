@@ -12,37 +12,96 @@ const blogRoutes = require('./blog-routes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security headers middleware
+// Enhanced Security Headers for SSL and Brave compatibility
 app.use((req, res, next) => {
   // Security headers
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Enhanced Content Security Policy for Brave
+  res.setHeader('Content-Security-Policy', 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com https://cdnjs.cloudflare.com https://identity.netlify.com; " +
+    "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
+    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " +
+    "img-src 'self' data: https:; " +
+    "connect-src 'self' https://taziki-solutions-production.up.railway.app https://cdn.vercel-analytics.com; " +
+    "frame-ancestors 'none'; " +
+    "base-uri 'self'; " +
+    "form-action 'self'"
+  );
+  
+  // CORS headers - more specific for production
+  const allowedOrigins = [
+    'https://tazikisolutions.com',
+    'https://www.tazikisolutions.com',
+    'https://taziki-solutions-production.up.railway.app'
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://tazikisolutions.com');
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
   
   next();
 });
 
 // Handle preflight requests
 app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://tazikisolutions.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Max-Age', '86400');
   res.sendStatus(200);
 });
 
-// Force HTTPS in production
+// Enhanced HTTPS and domain normalization
 app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  if (process.env.NODE_ENV === 'production') {
+    const host = req.get('Host');
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    
+    // Normalize domain - redirect www to non-www (or vice versa)
+    if (host === 'www.tazikisolutions.com') {
+      return res.redirect(301, `https://tazikisolutions.com${req.url}`);
+    }
+    
+    // Force HTTPS with correct domain
+    if (protocol !== 'https') {
+      return res.redirect(301, `https://tazikisolutions.com${req.url}`);
+    }
+    
+    // Ensure correct host header for SSL certificate validation
+    if (host !== 'tazikisolutions.com') {
+      return res.redirect(301, `https://tazikisolutions.com${req.url}`);
+    }
   }
   next();
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://tazikisolutions.com',
+    'https://www.tazikisolutions.com',
+    'https://taziki-solutions-production.up.railway.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -73,7 +132,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
-// Improved Email configuration
+// Improved Email configuration for Railway
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -82,8 +141,15 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
   },
+  // Enhanced settings for cloud environment
+  pool: true,
+  maxConnections: 1,
+  maxMessages: 1,
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
   tls: {
-    rejectUnauthorized: false // For Railway environment
+    rejectUnauthorized: false
   }
 });
 
@@ -157,6 +223,32 @@ app.get('/test-email', async (req, res) => {
   }
 });
 
+// Simple test email route (text only)
+app.get('/test-simple-email', async (req, res) => {
+  try {
+    const testMailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.ADMIN_EMAIL,
+      subject: 'Simple Test from Taziki',
+      text: 'This is a simple text email test. If you receive this, basic email is working.',
+    };
+
+    await transporter.sendMail(testMailOptions);
+    res.json({ 
+      success: true, 
+      message: 'Simple test email sent! Check your inbox.' 
+    });
+    
+  } catch (error) {
+    console.error('Simple test email error:', error);
+    res.json({ 
+      success: false, 
+      error: error.message,
+      code: error.code 
+    });
+  }
+});
+
 // Simple contact form test (bypasses all validation)
 app.post('/test-contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -204,6 +296,18 @@ app.get('/env', (req, res) => {
     }
   }
   res.json(envVars);
+});
+
+// SSL Certificate health check
+app.get('/ssl-health', (req, res) => {
+  const health = {
+    status: 'healthy',
+    domain: req.get('Host'),
+    protocol: req.headers['x-forwarded-proto'] || req.protocol,
+    timestamp: new Date().toISOString(),
+    userAgent: req.get('User-Agent')
+  };
+  res.json(health);
 });
 
 // =================== CONTACT FORM ROUTE ===================
@@ -332,6 +436,58 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+// Backup contact form that saves to file
+app.post('/contact-backup', async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({ 
+      success: false, 
+      error: 'All fields are required' 
+    });
+  }
+
+  try {
+    // Save to a JSON file
+    const contactData = {
+      name,
+      email,
+      subject,
+      message,
+      timestamp: new Date().toISOString(),
+      ip: req.ip
+    };
+
+    const contactsFile = path.join(__dirname, 'contact-submissions.json');
+    let contacts = [];
+    
+    // Read existing contacts
+    if (fs.existsSync(contactsFile)) {
+      contacts = JSON.parse(fs.readFileSync(contactsFile, 'utf8'));
+    }
+    
+    // Add new contact
+    contacts.push(contactData);
+    
+    // Save back to file
+    fs.writeFileSync(contactsFile, JSON.stringify(contacts, null, 2));
+    
+    console.log('✅ Contact form saved to file:', contactData);
+    
+    res.json({ 
+      success: true, 
+      message: 'Your message has been received! We will contact you soon.' 
+    });
+
+  } catch (error) {
+    console.error('Contact backup error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to save message. Please try again.' 
+    });
+  }
+});
+
 // =================== ADMIN ROUTES ===================
 
 // Image upload (admin only)
@@ -377,6 +533,21 @@ app.post('/admin/logout', requireAuth, (req, res) => {
   });
 });
 
+// Route to view saved contacts (admin only)
+app.get('/admin/contacts', requireAuth, (req, res) => {
+  try {
+    const contactsFile = path.join(__dirname, 'contact-submissions.json');
+    if (fs.existsSync(contactsFile)) {
+      const contacts = JSON.parse(fs.readFileSync(contactsFile, 'utf8'));
+      res.json({ success: true, contacts });
+    } else {
+      res.json({ success: true, contacts: [] });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // =================== BLOG ROUTES ===================
 app.use(blogRoutes);
 
@@ -385,16 +556,24 @@ app.use(express.static('.'));
 
 // Test route
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running' });
+  res.json({ 
+    status: 'Server is running',
+    domain: req.get('Host'),
+    protocol: req.headers['x-forwarded-proto'] || req.protocol,
+    ssl: (req.headers['x-forwarded-proto'] === 'https') ? '✅ Secure' : '❌ Not Secure'
+  });
 });
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log(`📧 Contact form endpoint: POST http://localhost:${PORT}/contact`);
-  console.log(`🔐 Admin dashboard: http://localhost:${PORT}/admin/dashboard.html`);
-  console.log(`📝 Blog API: http://localhost:${PORT}/api/blogs/published`);
+  console.log(`🌐 Production URL: https://tazikisolutions.com`);
+  console.log(`📧 Contact form endpoint: POST https://tazikisolutions.com/contact`);
+  console.log(`🔐 Admin dashboard: https://tazikisolutions.com/admin/dashboard.html`);
+  console.log(`📝 Blog API: https://tazikisolutions.com/api/blogs/published`);
   console.log(`🐛 Debug routes available:`);
   console.log(`   - https://tazikisolutions.com/debug-email`);
   console.log(`   - https://tazikisolutions.com/test-email`);
+  console.log(`   - https://tazikisolutions.com/test-simple-email`);
   console.log(`   - https://tazikisolutions.com/env`);
+  console.log(`   - https://tazikisolutions.com/ssl-health`);
 });
