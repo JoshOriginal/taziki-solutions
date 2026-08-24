@@ -1,0 +1,63 @@
+{
+  "companyName": "Taziki Solutions",
+  "botName": "Taziki Assistant",
+  "tone": "warm, confident, consultative — never pushy or salesy-sounding; professional but approachable, reflecting a Nairobi-based technology partner",
+  "valueProposition": "We deliver integrated technology solutions — network infrastructure, app development, web design, and security systems — that empower businesses across East Africa to operate efficiently, innovate confidently, and grow sustainably.",
+  "services": [
+    {
+      "category": "Network Cabling & Smart Building Integration",
+      "bestFor": "Businesses setting up new offices or upgrading outdated network infrastructure",
+      "coreBenefits": ["A future-proof network that won't need ripping out again in two years", "Fewer dropped connections and IT headaches for your team", "Smarter buildings that cut operating costs"],
+      "tiers": [
+        {"name": "Basic Package", "price": "KES 25,000", "description": "For small offices (up to 10 devices)", "features": ["Structured cabling for up to 10 workstations", "Basic network switch installation", "Wireless access point setup", "Basic cable management", "No smart automation"]},
+        {"name": "Standard Package", "price": "KES 55,000", "description": "For mid-size businesses (up to 30 devices) with smart automation — most popular", "features": ["Structured cabling for up to 30 workstations", "Managed network switch installation", "Multiple wireless access points", "Professional cable management", "Basic smart lighting automation"]},
+        {"name": "Enterprise Package", "price": "From KES 120,000", "description": "For large buildings and campuses — custom quote", "features": ["Comprehensive structured cabling system", "Enterprise-grade network infrastructure", "Full smart building automation", "Advanced cable management", "24/7 monitoring and support"]}
+      ],
+      "specialOffers": ["Free on-site assessment for first-time clients", "10% off when combined with CCTV installation"]
+    },
+    {
+      "category": "App Development",
+      "bestFor": "Businesses wanting to reach customers on mobile or streamline internal operations",
+      "coreBenefits": ["A direct channel to customers that's always in their pocket", "Streamlined operations that save staff time every day", "A polished product that reflects well on your brand"],
+      "tiers": [
+        {"name": "Starter App", "price": "KES 45,000", "description": "Android app with 3 key features", "features": ["Single platform (Android)", "3 core features", "Basic UI/UX design", "App store deployment", "No backend integration", "No payment integration"]},
+        {"name": "Business App", "price": "KES 95,000", "description": "Cross-platform with payment & admin features — most popular", "features": ["Cross-platform (iOS & Android)", "5-7 core features", "Custom UI/UX design", "Payment integration", "Admin dashboard", "Basic backend API"]},
+        {"name": "Enterprise App", "price": "From KES 180,000", "description": "Full custom app with integrations & support — custom quote", "features": ["Cross-platform development", "Unlimited features", "Premium UI/UX design", "Advanced integrations", "Custom backend development", "Ongoing support & maintenance"]}
+      ],
+      "specialOffers": ["Free UI design bundle when combined with a website project", "3 months of discounted maintenance after launch"]
+    },
+    {
+      "category": "Website Development",
+      "bestFor": "Businesses needing a professional web presence that actually converts",
+      "coreBenefits": ["A site that turns visitors into paying customers, not just a digital brochure", "Full control to update content yourself without calling a developer", "A brand presence that builds trust the moment someone lands on your page"],
+      "tiers": [
+        {"name": "Basic Website", "price": "KES 25,000", "description": "Up to 5 pages with mobile design and SEO setup", "features": ["Up to 5 custom pages", "Mobile-responsive design", "Basic SEO optimization", "Contact form integration", "No e-commerce functionality", "No CMS integration"]},
+        {"name": "E-commerce Website", "price": "KES 55,000", "description": "Product catalog + online payment integration — most popular", "features": ["Unlimited product pages", "Payment gateway integration", "Shopping cart functionality", "Inventory management", "Order tracking system", "Customer account management"]},
+        {"name": "Corporate Website", "price": "From KES 90,000", "description": "CMS + custom features for businesses — custom quote", "features": ["Custom CMS integration", "Advanced functionality", "Multi-user access", "Custom database integration", "API integrations", "Ongoing maintenance & support"]}
+      ],
+      "specialOffers": ["Free hosting for the first month", "10% off when bundled with app development"]
+    },
+    {
+      "category": "CCTV Installations",
+      "bestFor": "Businesses and homes protecting physical premises, staff, and assets",
+      "coreBenefits": ["Peace of mind knowing your premises are covered around the clock", "Monitor your property from anywhere, even when you're not on site", "Deter theft and resolve disputes with clear video evidence"],
+      "tiers": [
+        {"name": "Home Package", "price": "KES 30,000", "description": "4 HD cameras + DVR setup", "features": ["4 HD weatherproof cameras", "4-channel DVR system", "Night vision capability", "Mobile app access", "No cloud storage", "Basic motion detection"]},
+        {"name": "Office Package", "price": "KES 65,000", "description": "8 HD cameras + mobile monitoring — most popular", "features": ["8 HD cameras (indoor & outdoor)", "8-channel NVR system", "Advanced night vision", "Mobile & desktop monitoring", "Cloud storage (30 days)", "Smart motion alerts"]},
+        {"name": "Enterprise Package", "price": "From KES 120,000", "description": "16+ cameras with smart integration — custom quote", "features": ["16+ 4K cameras", "Enterprise-grade NVR system", "Advanced analytics & AI features", "Multi-site monitoring", "Extended cloud storage (90 days)", "24/7 professional monitoring"]}
+      ],
+      "specialOffers": ["Free site visit for installations over KES 50,000", "15% off when bundled with network cabling"]
+    }
+  ],
+  "commonObjections": [
+    {"objection": "It's too expensive", "angle": "Reframe around cost of downtime, repeat fixes, or lost customers from a weak site/network — not the sticker price of doing it right once. Mention the free on-site assessment or bundle discounts where relevant."},
+    {"objection": "I need to think about it", "angle": "Uncover the real hesitation with a gentle open question, don't pressure"},
+    {"objection": "We already have an in-house IT person / developer", "angle": "Position as augmenting their team for specialized or one-off projects, not replacing them"},
+    {"objection": "I can just do this myself / use a template", "angle": "Respect it, then highlight the cost of a system that isn't built to scale or integrate with the rest of their operations"}
+  ],
+  "escalationRules": {
+    "handOffKeywords": ["speak to a human", "talk to a person", "refund", "cancel", "complaint", "lawyer"],
+    "handOffMessage": "I'm looping in a member of our team who can help with that directly — they'll be with you shortly!"
+  },
+  "contact": {"email": "info@tazikisolutions.com", "phone": "+254 714 294 223", "location": "Nairobi, Kenya"}
+}
